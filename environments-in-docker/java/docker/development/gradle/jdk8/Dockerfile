@@ -1,8 +1,8 @@
 FROM openjdk:8-jdk-alpine
 
-ENV HOME="/root"
+ENV HOME="/home"
 ENV GRADLE_VERSION=5.6.2
-ENV GRADLE_USER_HOME="$HOME/.gradle"
+ENV GRADLE_USER_HOME="$HOME/gradle/.gradle"
 
 RUN apk add --no-cache \
         curl \
@@ -10,10 +10,17 @@ RUN apk add --no-cache \
         zip \
         vim \
         tree \
-        && curl -s "https://get.sdkman.io" | bash 
+        && curl -s "https://get.sdkman.io" | bash
+
+RUN addgroup -g 1000 -S gradle \
+    && adduser -S -G gradle -s /bin/bash -h "$HOME/gradle" -u 1000 gradle \
+    && mkdir "$HOME/gradle/.gradle" \
+    && chown --recursive gradle:gradle "$HOME/gradle"
+
+VOLUME "$HOME/gradle/.gradle"
 
 COPY run_scripts/sdk_install.sh /tmp
 
 RUN chmod a+x /tmp/sdk_install.sh && /tmp/sdk_install.sh
 
-WORKDIR /home/app
+WORKDIR /home/gradle
