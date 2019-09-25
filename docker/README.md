@@ -1,14 +1,15 @@
-## Use container
+## Build image
 
 DOCKER_IMAGE_NAME="jdk8-gradle-environment:0.0.1"
-PROJECT_DIRECTORY_NAME="app"
+PROJECT_DIRECTORY="app"
+PROJECT_NAME="todo"
 
 build
 ```
-docker build -t "$DOCKER_IMAGE_NAME" .
+docker build --rm -t "$DOCKER_IMAGE_NAME" -f Dockerfile.build .
 ```
 
 use
 ```
-docker run --rm -v "$PWD/$PROJECT_DIRECTORY_NAME":/home/gradle "$DOCKER_IMAGE_NAME" gradle --no-daemon <gradle-wrapper-task>
+docker run --rm -v "$PWD/$PROJECT_DIRECTORY/$PROJECT_NAME":/home/gradle "$DOCKER_IMAGE_NAME" gradle --no-daemon build
 ```
