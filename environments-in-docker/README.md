@@ -1,2 +1,0 @@
-## Environments in Docker container
-
