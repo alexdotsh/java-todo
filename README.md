@@ -9,7 +9,7 @@ Set environment variables
 ```
 DOCKER_IMAGE_NAME="jdk8-gradle-environment:0.0.1"
 
-PROJECT_DIRECTORY="$PWD/app/todo"
+PROJECT_DIRECTORY="$PWD"
 ```
 
 build
