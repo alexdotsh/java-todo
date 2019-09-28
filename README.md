@@ -6,31 +6,31 @@
 Docker image is used for building a *Gradle build* environment. After a successful build, a *build* directory will be created in the same project folder with the build results and a final `.jar` file (To be used in the step 2).
 
 Set environment variables
+```
+DOCKER_IMAGE_NAME="jdk8-gradle-environment:0.0.1"
 
-`DOCKER_IMAGE_NAME="jdk8-gradle-environment:0.0.1"`
-
-`PROJECT_DIRECTORY="app"`
-
-`PROJECT_NAME="todo"`
+PROJECT_DIRECTORY="$PWD/app/todo"
+```
 
 build
 ```terminal
-docker build --rm -t "$DOCKER_IMAGE_NAME" -f ./docker/Dockerfile.build .
+docker build --rm -t "$DOCKER_IMAGE_NAME" -f ./docker/Dockerfile.build ./docker/.
 ```
 
 use
 ```terminal
-docker run --rm -v "$PWD/$PROJECT_DIRECTORY/$PROJECT_NAME":/home/gradle "$DOCKER_IMAGE_NAME" gradle --no-daemon build
+docker run --rm -v "$PROJECT_DIRECTORY":/home/gradle "$DOCKER_IMAGE_NAME" gradle --no-daemon build
 ```
 
 #### Deployable environment - Step 2
+
 This Docker image is used to copy the `libs/*-0.0.1-SNAPSHOT.jar` file (from step 1) into the image and be able launch/run it from within the container.
 
-Set environment variables
+Set environment variables(Please set variables from Step 1 too)
 
 `DOCKER_APP_NAME="jdk8-app:0.0.1"`
 
-`JAR_FILE="app/todo/build/libs/todo-0.0.1-SNAPSHOT.jar"`
+`JAR_FILE="$PROJECT_DIRECTORY/build/libs/todo-0.0.1-SNAPSHOT.jar"`
 
 build
 ```terminal
@@ -39,7 +39,7 @@ docker build --rm -t "$DOCKER_APP_NAME" --build-arg JAR_FILE="$JAR_FILE" -f ./do
 
 use
 ```terminal
-docker run --rm -p 8080:8080 jdk8-app:0.0.1
+docker run --rm -p 8080:8080 $DOCKER_APP_NAME
 ```
 
 Access at:
