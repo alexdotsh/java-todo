@@ -31,7 +31,7 @@ Set environment variables(Please set variables from Step 1 too)
 ```
 DOCKER_APP_NAME="jdk8-app:0.0.1"
 
-JAR_FILE="$PROJECT_DIRECTORY/build/libs/todo-0.0.1-SNAPSHOT.jar"
+JAR_FILE="build/libs/todo-0.0.1-SNAPSHOT.jar"
 ```
 
 build
