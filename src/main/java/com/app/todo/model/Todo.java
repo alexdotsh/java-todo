@@ -1,10 +1,10 @@
 package com.app.todo.model;
 
 //import javax.persistence.DiscriminatorColumn;
-//import javax.persistence.Entity;
+import javax.persistence.Entity;
 //import javax.persistence.GeneratedValue;
 //import javax.persistence.GenerationType;
-//import javax.persistence.Id;
+import javax.persistence.Id;
 //import javax.persistence.Inheritance;
 //import javax.persistence.InheritanceType;
 
@@ -16,9 +16,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-//@Entity
+@Entity
 public class Todo {
-    private int id;
+    @Id private int id;
     private String Title,Description;
 
 
