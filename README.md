@@ -36,12 +36,12 @@ JAR_FILE="build/libs/todo-0.0.1-SNAPSHOT.jar"
 
 build
 ```terminal
-docker build --rm -t "$DOCKER_APP_NAME" --build-arg JAR_FILE="$JAR_FILE" -f ./docker/Dockerfile .
+docker build --rm -t "jdk8-app:0.0.1" --build-arg JAR_FILE="build/libs/todo-0.0.1-SNAPSHOT.jar" -f ./docker/Dockerfile .
 ```
 
 use
 ```terminal
-docker run --rm -p 8080:8080 $DOCKER_APP_NAME
+docker run --rm -p 8080:8080 jdk8-app:0.0.1
 ```
 
 Access at:
