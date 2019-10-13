@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class TodoController {
 
-    @Autowired
-    TodoRepository er;
+    //@Autowired
+    //TodoRepository er;
 
     @RequestMapping(value = "/")
     public String index(Model model) {
@@ -26,7 +26,8 @@ public class TodoController {
 
         Todo[] todos = {todo1, todo2};
 
-        model.addAttribute("todos", er.findTotalByAccountType("aa"));
+        //model.addAttribute("todos", er.findTotalByAccountType("aa"));
+        model.addAttribute("todos", todos);
 
         return "index";
     }
