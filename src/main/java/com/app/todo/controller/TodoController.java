@@ -24,9 +24,9 @@ public class TodoController {
         todo2.setTitle("title2");
         todo2.setDescription("desc2");
 
-        Todo[] todos = {todo1, todo2};
+        Iterable<Todo> todos = er.findAll();//{todo1, todo2};
 
-        model.addAttribute("todos", er.findAll());
+        model.addAttribute("todos", todos);
         //model.addAttribute("todos", todos);
 
         return "index";
