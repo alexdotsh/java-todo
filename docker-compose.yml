@@ -6,14 +6,15 @@ services:
     ports:
       - 8080:8080
     depends_on:
-      - database1
-  database1:
+      - database
+  database:
     image: mysql:8.0.14
     ports:
       - 3306:3306
     environment:
-      - MYSQL_ROOT_PASSWORD=spring
-      - MYSQL_PASSWORD=12345
-      - MYSQL_USER=nflmvp
-      - MYSQL_DATABASE=mh1
-      - MYSQL_ROOT_HOST='%'
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_PASSWORD=spring
+      - MYSQL_USER=spring
+      - MYSQL_DATABASE=todos_db
+      - MYSQL_ROOT_HOST=%
+    command: --default-authentication-plugin=mysql_native_password
