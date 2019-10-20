@@ -12,12 +12,12 @@ DOCKER_IMAGE_NAME="jdk8-gradle-environment:0.0.1"
 PROJECT_DIRECTORY="$PWD"
 ```
 
-build
+Build Gradle Docker image
 ```terminal
 docker build --rm -t "$DOCKER_IMAGE_NAME" -f ./docker/Dockerfile.build ./docker/.
 ```
 
-use
+Run Gradle Docker container
 ```terminal
 docker run --rm -v "$PROJECT_DIRECTORY":/home/gradle "$DOCKER_IMAGE_NAME" gradle --no-daemon build
 ```
@@ -29,19 +29,19 @@ This Docker image is used to copy the `libs/*-0.0.1-SNAPSHOT.jar` file (from ste
 Set environment variables(Please set variables from Step 1 too)
 
 ```
-DOCKER_APP_NAME="jdk8-app:0.0.1"
+APP_NAME="jdk8-app:0.0.1"
 
 JAR_FILE="build/libs/todo-0.0.1-SNAPSHOT.jar"
 ```
 
-build
+Build App Docker image with `*.jar` file (From step 1)
 ```terminal
-docker build --rm -t "$DOCKER_APP_NAME" --build-arg JAR_FILE="$JAR_FILE" -f ./docker/Dockerfile .
+docker build --rm -t "$APP_NAME" --build-arg JAR_FILE="$JAR_FILE" -f ./docker/Dockerfile .
 ```
 
-use
+Run App Docker container with `*.jar` file (From step 1) mounted
 ```terminal
-docker run --rm -p 8080:8080 $DOCKER_APP_NAME
+docker run --rm -p 8080:8080 -v "$JAR_FILE:/app.jar" $APP_NAME
 ```
 
 Access at:
