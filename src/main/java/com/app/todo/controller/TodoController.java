@@ -16,9 +16,13 @@ public class TodoController {
     @RequestMapping(value = "/")
     public String index(Model model) {
 
+
+
         Todo todo1 = new Todo();
         todo1.setTitle("title1");
         todo1.setDescription("desc1");
+
+        er.save(todo1);
 
         Todo todo2 = new Todo();
         todo2.setTitle("title2");

@@ -1,24 +1,19 @@
-version: '3'
+version: '3.7'
+
 services:
-  db1:
-    image: mysql:8
-    #command: --default-authentication-plugin=mysql_native_password
-    restart: always
-    environment:
-      - "MYSQL_ROOT_PASSWORD=12345"
-        #ports:
-      #-:3306"
-  web:
-    build:
-      context: '.'
-      dockerfile: './docker/Dockerfile'
-      args:
-        JAR_FILE: "build/libs/todo-0.0.1-SNAPSHOT.jar"
-    restart: always
+  app:
+    image: jdk8-app:0.0.1
     ports:
-      - "3000:3000"
-    # volumes:
-    #  - ./cbapi-footballpools:/app
+      - 8080:8080
     depends_on:
-      - db1
-      #- redis
+      - database1
+  database1:
+    image: mysql:8.0.14
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=spring
+      - MYSQL_PASSWORD=12345
+      - MYSQL_USER=nflmvp
+      - MYSQL_DATABASE=mh1
+      - MYSQL_ROOT_HOST='%'

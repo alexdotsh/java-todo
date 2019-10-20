@@ -47,6 +47,6 @@ public class Todo {
         return Description;
     }
 
-    public void setDescription(String Title) {
+    public void setDescription(String Description) {
         this.Description = Description;
     }}
