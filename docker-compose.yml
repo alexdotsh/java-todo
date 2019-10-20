@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+  app:
+    image: jdk8-app:0.0.1
+    ports:
+      - 8080:8080
+    depends_on:
+      - database1
+  database1:
+    image: mysql:8.0.14
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=spring
+      - MYSQL_PASSWORD=12345
+      - MYSQL_USER=nflmvp
+      - MYSQL_DATABASE=mh1
+      - MYSQL_ROOT_HOST='%'

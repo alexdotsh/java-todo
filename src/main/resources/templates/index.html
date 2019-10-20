@@ -7,6 +7,15 @@
     <body>
         <h1>Welcome to the home page!</h1>
 
+        <table>
+            <th:block th:each="todo : ${todos}">
+                <tr>
+                    <td th:text="${todo.title}">...</td>
+                    <td th:text="${todo.description}">...</td>
+                </tr>
+            </th:block>
+        </table>
+
         <br />
         <button type="button">Create todo task!</button>
     </body>

@@ -35,12 +35,12 @@ JAR_FILE="build/libs/todo-0.0.1-SNAPSHOT.jar"
 ```
 
 Build App Docker image with `*.jar` file (From step 1)
-```terminal
+```
 docker build --rm -t "$APP_NAME" --build-arg JAR_FILE="$JAR_FILE" -f ./docker/Dockerfile .
 ```
 
 Run App Docker container with `*.jar` file (From step 1) mounted
-```terminal
+```
 docker run --rm -p 8080:8080 -v "$JAR_FILE:/app.jar" $APP_NAME
 ```
 
