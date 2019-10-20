@@ -4,6 +4,8 @@ package com.app.todo.model;
 import javax.persistence.Entity;
 //import javax.persistence.GeneratedValue;
 //import javax.persistence.GenerationType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 //import javax.persistence.Inheritance;
 //import javax.persistence.InheritanceType;
@@ -18,7 +20,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 public class Todo {
-    @Id private int id;
+    @Id @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private int id;
     private String Title,Description;
 
 
@@ -41,9 +44,9 @@ public class Todo {
     }
 
     public String getDescription() {
-        return Title;
+        return Description;
     }
 
     public void setDescription(String Title) {
-        this.Title = Title;
+        this.Description = Description;
     }}
