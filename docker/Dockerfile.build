@@ -1,7 +1,7 @@
 FROM openjdk:8-jdk-alpine
 
 ENV HOME="/home"
-ENV GRADLE_VERSION=5.6.2
+ENV GRADLE_VERSION=5.6.3
 ENV GRADLE_USER_HOME="$HOME/gradle/.gradle"
 
 RUN apk add --no-cache \
