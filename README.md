@@ -19,7 +19,8 @@ docker build --rm -t "$DOCKER_IMAGE_NAME" -f ./docker/Dockerfile.build ./docker/
 
 Run Gradle Docker container
 ```bash
-docker run --rm -v "$PROJECT_DIRECTORY":/home/gradle "$DOCKER_IMAGE_NAME" gradle --no-daemon build
+docker volume create --name gradle-cache
+docker run --rm -v gradle-cache:/home/gradle/.gradle -v "$PROJECT_DIRECTORY":/home/gradle "$DOCKER_IMAGE_NAME" gradle build
 ```
 
 #### Deployable environment - Step 2
@@ -46,4 +47,6 @@ docker run --rm -p 8080:8080 -v "$JAR_FILE:/app.jar" $APP_NAME
 
 Access at:
 
-`localhost:8080`
+```bash
+localhost:8080
+```
