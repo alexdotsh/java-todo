@@ -7,6 +7,7 @@ services:
       - 8080:8080
     depends_on:
       - database
+    entrypoint: /bin/bash -c "./wait-for-it.sh -t 0 database:3306 -- java -Djava.security.egd=file:/dev/./urandom -jar app.jar"
   database:
     image: mysql:8.0.14
     ports:
