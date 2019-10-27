@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 //import javax.persistence.Inheritance;
 //import javax.persistence.InheritanceType;
 
@@ -22,10 +23,11 @@ import lombok.Setter;
 public class Todo {
     @Id @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
-    private String Title,Description;
 
+    @NotBlank(message = "Name is mandatory")
+    private String Title;
 
-
+    private String Description;
 
     public int getId() {
         return id;
