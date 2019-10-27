@@ -7,9 +7,9 @@ Docker image is used for building a *Gradle build* environment. After a successf
 
 Set environment variables
 ```bash
-DOCKER_IMAGE_NAME="jdk8-gradle-environment:0.0.1"
+export DOCKER_IMAGE_NAME="jdk8-gradle-environment:0.0.1"
 
-PROJECT_DIRECTORY="$PWD"
+export PROJECT_DIRECTORY="$PWD"
 ```
 
 Build Gradle Docker image
@@ -30,9 +30,9 @@ This Docker image is used to copy the `libs/*-0.0.1-SNAPSHOT.jar` file (from ste
 Set environment variables(Please set variables from Step 1 too)
 
 ```bash
-APP_NAME="jdk8-app:0.0.1"
+export APP_NAME="jdk8-app:0.0.1"
 
-JAR_FILE="build/libs/todo-0.0.1-SNAPSHOT.jar"
+export JAR_FILE="build/libs/todo-0.0.1-SNAPSHOT.jar"
 ```
 
 Build App Docker image with `*.jar` file (From step 1)

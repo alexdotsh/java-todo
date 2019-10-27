@@ -10,7 +10,8 @@ VOLUME /tmp
 
 ARG JAR_FILE
 
-COPY ${JAR_FILE} docker/wait-for-it.sh /
+COPY ${JAR_FILE} app.jar
+COPY docker/wait-for-it.sh /
 
 RUN chmod +x wait-for-it.sh
 
