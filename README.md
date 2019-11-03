@@ -45,6 +45,11 @@ Run App Docker container with `*.jar` file (From step 1) mounted
 docker run --rm -p 8080:8080 -v "$JAR_FILE:/app.jar" $APP_NAME
 ```
 
+or run with docker-compose
+```bash
+docker-compose up
+```
+
 Access at:
 
 ```bash
