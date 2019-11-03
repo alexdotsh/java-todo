@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,12 +35,20 @@ public class TodoController {
 
         return "index";
     }
-    @RequestMapping(value = "/new", method = RequestMethod.GET)
 
+    @RequestMapping(value = "/new", method = RequestMethod.GET)
     public String newTodo(Todo todo) {
 
         return "new";
     }
+
+    @RequestMapping(value = "/todo/{Id}/delete", method = RequestMethod.DELETE)
+    public String newTodo(@PathVariable int Id) {
+
+        er.deleteById(Id);
+        return "redirect:/";
+    }
+
 
     @RequestMapping(value = "/index", method = RequestMethod.POST)
     public String create(Model model, @Valid @ModelAttribute Todo todo, BindingResult bindingResult) {
