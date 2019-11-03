@@ -1,16 +1,12 @@
 package com.app.todo.model;
 
-//import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
-//import javax.persistence.GeneratedValue;
-//import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-//import javax.persistence.Inheritance;
-//import javax.persistence.InheritanceType;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
-import com.app.todo.repository.TodoRepository;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,11 +16,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 public class Todo {
-    @Id @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String Title,Description;
 
+    @NotBlank(message = "Name is mandatory")
+    private String Title;
 
+    @Size(min= 10, message = "Description need to be longer")
+    private String Description;
 
 
     public int getId() {
@@ -49,4 +48,5 @@ public class Todo {
 
     public void setDescription(String Description) {
         this.Description = Description;
-    }}
+    }
+}
