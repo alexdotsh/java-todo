@@ -5,7 +5,9 @@ import com.app.todo.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class TodoController {
@@ -13,26 +15,30 @@ public class TodoController {
     @Autowired
     TodoRepository er;
 
-    @RequestMapping(value = "/")
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Model model) {
 
-
-
-        Todo todo1 = new Todo();
-        todo1.setTitle("title1");
-        todo1.setDescription("desc1");
-
-        er.save(todo1);
-
-        Todo todo2 = new Todo();
-        todo2.setTitle("title2");
-        todo2.setDescription("desc2");
-
-        Iterable<Todo> todos = er.findAll();//{todo1, todo2};
+        Iterable<Todo> todos = er.findAll();
 
         model.addAttribute("todos", todos);
-        //model.addAttribute("todos", todos);
 
         return "index";
     }
+
+    @RequestMapping(value = "/new", method = RequestMethod.GET)
+    public String newTodo(Model model) {
+
+        return "new";
+    }
+
+    @RequestMapping(value = "/index", method = RequestMethod.POST)
+    public String createTodo(Todo todo, Model model) {
+        er.save(todo);
+
+        Iterable<Todo> todos = er.findAll();
+        model.addAttribute("todos", todos);
+
+        return "index";
+    }
+
 }

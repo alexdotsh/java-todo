@@ -6,17 +6,17 @@
     </head>
     <body>
         <h1>Welcome to the home page!</h1>
-
         <table>
             <th:block th:each="todo : ${todos}">
                 <tr>
-                    <td th:text="${todo.title}">...</td>
-                    <td th:text="${todo.description}">...</td>
+                    <td th:text="${todo.Title}">...</td>
+                    <td th:text="${todo.Description}">...</td>
                 </tr>
             </th:block>
         </table>
-
         <br />
-        <button type="button">Create todo task!</button>
+        <form action="/new" method="GET">
+            <input type="submit" value="Create new todo task!">
+        </form>
     </body>
 </html>
