@@ -6,13 +6,20 @@
     </head>
     <body>
         <h1>New todo page</h1>
-        <form action="index" method="post">
-        <p>Title</p>
-        <input type="text" name="Title">
-        <br>
-        <p>Description</p>
-        <input type="text" name="Description">
-        <br />
-        <input type="submit" value="Create todo task!">
+
+
+        <form th:object="${todo}" method="post" action="/index">
+
+            <input type="text" th:field="*{Title}" />
+            <p th:if="${#fields.hasErrors('Title')}" th:errors="*{Title}">Incorrect Title</p>
+
+            <input type="text" th:field="*{Description}" />
+            <p th:if="${#fields.hasErrors('Description')}" th:errors="*{Description}">Incorrect Description</p>
+
+            <input type="submit" id="doUpdate" name="_eventId_updateData" value="Update now!" />
+
+        </form>
+
+
     </body>
 </html>
