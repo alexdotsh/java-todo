@@ -17,4 +17,28 @@ public class Todo {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String Title, Description;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return Title;
+    }
+
+    public void setTitle(String Title) {
+        this.Title = Title;
+    }
+
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String Description) {
+        this.Description = Description;
+    }
 }
