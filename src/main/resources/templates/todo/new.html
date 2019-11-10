@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>New todo page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <h1>New todo page</h1>
+
+
+        <form th:object="${todo}" method="post" action="/todo/create">
+            <input type="hidden" th:field="*{Id}" />
+
+            <input type="text" th:field="*{Title}" />
+            <p th:if="${#fields.hasErrors('Title')}" th:errors="*{Title}">Incorrect Title</p>
+
+            <input type="text" th:field="*{Description}" />
+            <p th:if="${#fields.hasErrors('Description')}" th:errors="*{Description}">Incorrect Description</p>
+
+            <input type="submit" id="doUpdate" name="_eventId_updateData" value="Update now!" />
+
+        </form>
+
+
+    </body>
+</html>
