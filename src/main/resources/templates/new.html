@@ -9,6 +9,7 @@
 
 
         <form th:object="${todo}" method="post" action="/index">
+            <input type="hidden" th:field="*{Id}" />
 
             <input type="text" th:field="*{Title}" />
             <p th:if="${#fields.hasErrors('Title')}" th:errors="*{Title}">Incorrect Title</p>

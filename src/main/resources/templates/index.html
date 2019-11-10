@@ -12,7 +12,12 @@
                     <td th:text="${todo.Title}">...</td>
                     <td th:text="${todo.Description}">...</td>
                     <td>
-                        <form th:object="${todo}" th:method="delete" th:action="@{/todo/{id}/delete(id=${todo.id})}">
+                        <form th:object="${todo}" th:method="GET" th:action="@{/todo/{id}/update(id=${todo.id})}">
+                            <input type="submit" value="update">
+                        </form>
+                    </td>
+                    <td>
+                        <form th:object="${todo}" th:method="delete" th:action="@{/todo/{id}(id=${todo.id})}">
                             <input type="submit" value="DELETE!">
                         </form>
                     </td>
