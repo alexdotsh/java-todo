@@ -1,7 +1,9 @@
 package com.app.todo.controller;
 
 import com.app.todo.model.Todo;
+import com.app.todo.model.User;
 import com.app.todo.repository.TodoRepository;
+import com.app.todo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -25,51 +27,68 @@ import java.util.Optional;
 public class TodoController {
 
     @Autowired
-    TodoRepository er;
+    TodoRepository todo_repository;
+    @Autowired
+    UserRepository user_repository;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Model model) {
 
-        Iterable<Todo> todos = er.findAll();
+        Iterable<Todo> todos = todo_repository.findAll();
 
         model.addAttribute("todos", todos);
 
-        return "index";
+        return "todo/index";
     }
 
-    @RequestMapping(value = "/new", method = RequestMethod.GET)
+    @RequestMapping(value = "todo/new", method = RequestMethod.GET)
     public String newTodo(Todo todo) {
+        return "todo/new";
+    }
 
-        return "new";
+    @RequestMapping(value = "todo/create", method = RequestMethod.POST)
+    public String create(Model model, @Valid @ModelAttribute Todo todo, BindingResult bindingResult) {
+        User user;
+
+        Optional<User> searched_user = user_repository.findByLogin("test_login");
+        if(searched_user.isPresent())
+            user = searched_user.get();
+        else{
+            user = new User();
+            user.setLogin("test_login");
+            user_repository.save(user);
+        }
+
+
+
+        if(!bindingResult.hasErrors()){
+            todo.setUser(user);
+            todo.setDescription(todo.getDescription()+user.getLogin());
+            todo_repository.save(todo);
+            Iterable<Todo> todos = todo_repository.findAll();
+
+            model.addAttribute("todos", todos);
+            return "redirect:/";
+        }else{
+            return "todo/new";
+        }
     }
 
     @RequestMapping(value = "/todo/{Id}/update", method = RequestMethod.GET)
     public String updateTodo(@PathVariable int Id, Model model) {
-        Optional<Todo> maybe_todo = er.findById(Id);
+        Optional<Todo> maybe_todo = todo_repository.findById(Id);
         Todo todo = maybe_todo.get();
         model.addAttribute("todo", todo);
 
-        return "new";
+        return "todo/new";
     }
 
     @RequestMapping(value = "/todo/{Id}", method = RequestMethod.DELETE)
     public String deleteTodo(@PathVariable int Id) {
 
-        er.deleteById(Id);
+        todo_repository.deleteById(Id);
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/index", method = RequestMethod.POST)
-    public String create(Model model, @Valid @ModelAttribute Todo todo, BindingResult bindingResult) {
 
-        if(!bindingResult.hasErrors()){
-            er.save(todo);
-            Iterable<Todo> todos = er.findAll();
-
-            model.addAttribute("todos", todos);
-            return "index";
-        }else{
-            return "new";
-        }
-    }
 }

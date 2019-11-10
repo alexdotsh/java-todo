@@ -1,9 +1,6 @@
 package com.app.todo.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -25,6 +22,11 @@ public class Todo {
     @Size(min= 10, message = "Description need to be longer")
     private String Description;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "post_id", nullable = false)
+    //@OnDelete(action = OnDeleteAction.CASCADE)
+    //@JsonIgnore
+    private User user;
 
     public int getId() {
         return id;
@@ -49,4 +51,8 @@ public class Todo {
     public void setDescription(String Description) {
         this.Description = Description;
     }
+
+    public User getUser() {return user;}
+
+    public void setUser(User user) { this.user = user; }
 }
