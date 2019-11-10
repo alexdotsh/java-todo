@@ -19,6 +19,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Controller
 public class TodoController {
@@ -42,13 +43,21 @@ public class TodoController {
         return "new";
     }
 
-    @RequestMapping(value = "/todo/{Id}/delete", method = RequestMethod.DELETE)
-    public String newTodo(@PathVariable int Id) {
+    @RequestMapping(value = "/todo/{Id}/update", method = RequestMethod.GET)
+    public String updateTodo(@PathVariable int Id, Model model) {
+        Optional<Todo> maybe_todo = er.findById(Id);
+        Todo todo = maybe_todo.get();
+        model.addAttribute("todo", todo);
+
+        return "new";
+    }
+
+    @RequestMapping(value = "/todo/{Id}", method = RequestMethod.DELETE)
+    public String deleteTodo(@PathVariable int Id) {
 
         er.deleteById(Id);
         return "redirect:/";
     }
-
 
     @RequestMapping(value = "/index", method = RequestMethod.POST)
     public String create(Model model, @Valid @ModelAttribute Todo todo, BindingResult bindingResult) {
