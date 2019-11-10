@@ -29,40 +29,4 @@ public class UserController {
 
         return "index";
     }
-//
-//    @RequestMapping(value = "/new", method = RequestMethod.GET)
-//    public String newTodo(Todo todo) {
-//
-//        return "new";
-//    }
-//
-//    @RequestMapping(value = "/todo/{Id}/update", method = RequestMethod.GET)
-//    public String updateTodo(@PathVariable int Id, Model model) {
-//        Optional<Todo> maybe_todo = er.findById(Id);
-//        Todo todo = maybe_todo.get();
-//        model.addAttribute("todo", todo);
-//
-//        return "new";
-//    }
-//
-//    @RequestMapping(value = "/todo/{Id}", method = RequestMethod.DELETE)
-//    public String deleteTodo(@PathVariable int Id) {
-//
-//        er.deleteById(Id);
-//        return "redirect:/";
-//    }
-//
-//    @RequestMapping(value = "/index", method = RequestMethod.POST)
-//    public String create(Model model, @Valid @ModelAttribute Todo todo, BindingResult bindingResult) {
-//
-//        if(!bindingResult.hasErrors()){
-//            er.save(todo);
-//            Iterable<Todo> todos = er.findAll();
-//
-//            model.addAttribute("todos", todos);
-//            return "index";
-//        }else{
-//            return "new";
-//        }
-//    }
 }
