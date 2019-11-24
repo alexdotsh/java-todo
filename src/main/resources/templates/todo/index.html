@@ -13,12 +13,12 @@
                     <td th:text="${todo.Description}">...</td>
                     <td th:text="${todo.User.login}">...</td>
                     <td>
-                        <form th:object="${todo}" th:method="GET" th:action="@{/todo/{id}/update(id=${todo.id})}">
+                        <form th:object="${todo}" th:method="GET" th:action="@{/todos/{id}/update(id=${todo.id})}">
                             <input type="submit" value="update">
                         </form>
                     </td>
                     <td>
-                        <form th:object="${todo}" th:method="delete" th:action="@{/todo/{id}(id=${todo.id})}">
+                        <form th:object="${todo}" th:method="delete" th:action="@{/todos/{id}(id=${todo.id})}">
                             <input type="submit" value="DELETE!">
                         </form>
                     </td>
@@ -26,7 +26,7 @@
             </th:block>
         </table>
         <br />
-        <form action="/todo/new" method="GET">
+        <form action="/todos/new" method="GET">
             <input type="submit" value="Create new todo task!">
         </form>
     </body>

@@ -22,7 +22,7 @@ public class Todo {
     @Size(min= 10, message = "Description need to be longer")
     private String Description;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "post_id", nullable = false)
     //@OnDelete(action = OnDeleteAction.CASCADE)
     //@JsonIgnore

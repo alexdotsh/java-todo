@@ -5,33 +5,34 @@ import com.app.todo.model.User;
 import com.app.todo.repository.TodoRepository;
 import com.app.todo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
+import javax.swing.*;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import java.util.HashMap;
-import java.util.Map;
+
+import javax.validation.groups.Default;
 import java.util.Optional;
 
 @Controller
+//@RequestMapping("todos") unfortunately can't be used as root path is here.
 public class TodoController {
 
     @Autowired
-    TodoRepository todo_repository;
+    private TodoRepository todo_repository;
     @Autowired
-    UserRepository user_repository;
+    private UserRepository user_repository;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @Autowired
+    Validator validator;
+
+    @RequestMapping(value ={"/todos", "/"}, method = RequestMethod.GET)
     public String index(Model model) {
 
         Iterable<Todo> todos = todo_repository.findAll();
@@ -41,21 +42,21 @@ public class TodoController {
         return "todo/index";
     }
 
-    @RequestMapping(value = "todo/new", method = RequestMethod.GET)
+    @RequestMapping(value = "todos/new", method = RequestMethod.GET)
     public String newTodo(Todo todo) {
         return "todo/new";
     }
 
-    @RequestMapping(value = "todo/create", method = RequestMethod.POST)
-    public String create(Model model, @Valid @ModelAttribute Todo todo, BindingResult bindingResult) {
+    @RequestMapping(value = "todos/create", method = RequestMethod.POST)
+    public String create(Model model, @Valid @ModelAttribute Todo todo, BindingResult bindingResult, @RequestParam String login) {
         User user;
 
-        Optional<User> searched_user = user_repository.findByLogin("test_login");
+        Optional<User> searched_user = user_repository.findByLogin(login);
         if(searched_user.isPresent())
             user = searched_user.get();
         else{
             user = new User();
-            user.setLogin("test_login");
+            user.setLogin(login);
             user_repository.save(user);
         }
 
@@ -67,14 +68,14 @@ public class TodoController {
             todo_repository.save(todo);
             Iterable<Todo> todos = todo_repository.findAll();
 
-            model.addAttribute("todos", todos);
+            //model.addAttribute("todos", todos);
             return "redirect:/";
         }else{
             return "todo/new";
         }
     }
 
-    @RequestMapping(value = "/todo/{Id}/update", method = RequestMethod.GET)
+    @RequestMapping(value = "todos/{Id}/update", method = RequestMethod.GET)
     public String updateTodo(@PathVariable int Id, Model model) {
         Optional<Todo> maybe_todo = todo_repository.findById(Id);
         Todo todo = maybe_todo.get();
@@ -83,7 +84,7 @@ public class TodoController {
         return "todo/new";
     }
 
-    @RequestMapping(value = "/todo/{Id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "todos/{Id}", method = RequestMethod.DELETE)
     public String deleteTodo(@PathVariable int Id) {
 
         todo_repository.deleteById(Id);
