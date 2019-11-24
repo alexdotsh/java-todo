@@ -18,12 +18,12 @@ import java.util.Optional;
 public class UserController {
 
     @Autowired
-    TodoRepository er;
+    TodoRepository todo_repository;
 
     @RequestMapping(value = "users/", method = RequestMethod.GET)
     public String index(Model model) {
 
-        Iterable<Todo> todos = er.findAll();
+        Iterable<Todo> todos = todo_repository.findAll();
 
         model.addAttribute("todos", todos);
 

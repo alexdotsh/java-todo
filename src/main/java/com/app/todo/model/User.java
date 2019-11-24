@@ -18,12 +18,22 @@ public class User {
     private String Email;
     private String password;
 
+    @NotBlank(message = "Name is mandatory")
+    private String login;
     @Transient
     private String passwordConfirm;
 
 
     public Long getId() { 
         return id;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public void setId(Long id) {
