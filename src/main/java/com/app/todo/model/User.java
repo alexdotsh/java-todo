@@ -14,15 +14,24 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 public class User {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String Name;
     @NotBlank(message = "Name is mandatory")
-    private String login;
+    private String Username;
+    private String Email;
+    private String password;
 
-    public int getId() { return id; }
+    @Transient
+    private String passwordConfirm;
 
-    public void setId(int id) {
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
         this.id = id;
     }
 

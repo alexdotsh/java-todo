@@ -54,13 +54,11 @@ public class TodoController {
         Optional<User> searched_user = user_repository.findByLogin(login);
         if(searched_user.isPresent())
             user = searched_user.get();
-        else{
+        else {
             user = new User();
             user.setLogin(login);
             user_repository.save(user);
         }
-
-
 
         if(!bindingResult.hasErrors()){
             todo.setUser(user);
