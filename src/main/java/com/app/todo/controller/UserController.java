@@ -32,7 +32,7 @@ public class UserController {
 
         Iterable<User> users = user_repository.findAll();
 
-//        ArrayList<User> users = new ArrayList<User>();
+//        ArrayList<User> users = new ArrayList<User>(); //
 //        User user = new User();
 //        user.setLogin("login1");
 //        Set<Todo> todos = new HashSet<Todo>();
