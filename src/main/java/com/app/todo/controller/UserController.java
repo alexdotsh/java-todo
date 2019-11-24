@@ -30,17 +30,17 @@ public class UserController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(Model model) {
 
-        //Iterable<User> users = new ArrayList<User>();//= user_repository.findAll();
+        Iterable<User> users = user_repository.findAll();
 
-        ArrayList<User> users = new ArrayList<User>();
-        User user = new User();
-        user.setLogin("login1");
-        Set<Todo> todos = new HashSet<Todo>();
-        Todo todo = new Todo();
-        todo.setTitle("todo title");
-        todos.add(todo);
-        user.setTodos(todos);
-        users.add(user);
+//        ArrayList<User> users = new ArrayList<User>();
+//        User user = new User();
+//        user.setLogin("login1");
+//        Set<Todo> todos = new HashSet<Todo>();
+//        Todo todo = new Todo();
+//        todo.setTitle("todo title");
+//        todos.add(todo);
+//        user.setTodos(todos);
+//        users.add(user);
 
         model.addAttribute("users", users);
 
