@@ -34,7 +34,7 @@ public class User {
         this.login = login;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
+    @OneToMany(/*cascade = CascadeType.ALL, */fetch = FetchType.LAZY, mappedBy = "user")
     private Set<Todo> Todos;
 
     public Set<Todo> getTodos() { return Todos; }
