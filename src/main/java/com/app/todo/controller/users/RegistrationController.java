@@ -16,6 +16,6 @@ public class RegistrationController {
     @GetMapping("/users/registration")
     public String registration(Model model) {
         
-        return "registration";
+        return "user/registration";
     }
 }
