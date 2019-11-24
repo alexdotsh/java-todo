@@ -20,13 +20,13 @@ public class UserController {
     @Autowired
     TodoRepository todo_repository;
 
-    @RequestMapping(value = "users/", method = RequestMethod.GET)
+    @RequestMapping(value = "/users", method = RequestMethod.GET)
     public String index(Model model) {
 
         Iterable<Todo> todos = todo_repository.findAll();
 
         model.addAttribute("todos", todos);
 
-        return "index";
+        return "user/index";
     }
 }

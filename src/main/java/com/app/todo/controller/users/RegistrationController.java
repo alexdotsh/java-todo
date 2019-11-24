@@ -15,7 +15,25 @@ public class RegistrationController {
 
     @GetMapping("/users/registration")
     public String registration(Model model) {
-        
+        model.addAttribute("user", new User());
+
         return "user/registration";
+    }
+
+    @PostMapping("/users/registration")
+    public String registration(@ModelAttribute("user") User user, BindingResult bindingResult) {
+
+        if (!bindingResult.hasErrors()) {
+            user_repository.save(user);
+        } else {
+            return "user/registration";
+        }
+        
+        return "redirect:/welcome";
+    }
+
+    @GetMapping({"/", "/welcome"})
+    public String welcome(Model model) {
+        return "user/welcome";
     }
 }
