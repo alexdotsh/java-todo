@@ -7,19 +7,19 @@
     <body>
         <h1>Welcome to the home page!</h1>
         <table>
-            <th:block th:each="todo : ${todos}">
+            <th>Login</th>
+            <th:block th:each="user : ${users}">
+
                 <tr>
-                    <td th:text="${todo.Title}">...</td>
-                    <td th:text="${todo.Description}">...</td>
+                    <td th:text="${user.Login}">...</td>
                     <td>
-                        <form th:object="${todo}" th:method="GET" th:action="@{/todo/{id}/update(id=${todo.id})}">
-                            <input type="submit" value="update">
-                        </form>
-                    </td>
-                    <td>
-                        <form th:object="${todo}" th:method="delete" th:action="@{/todo/{id}(id=${todo.id})}">
-                            <input type="submit" value="DELETE!">
-                        </form>
+                        <table>
+                            <ul>
+                                <div th:each="todo : ${user.Todos}">
+                                    <li th:text="${todo.Title}">"${todo.name}"</li>
+                                </div>
+                            </ul>
+                        </table>
                     </td>
                 </tr>
             </th:block>
