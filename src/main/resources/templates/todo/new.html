@@ -17,7 +17,7 @@
             <input type="text" th:field="*{Description}" />
             <p th:if="${#fields.hasErrors('Description')}" th:errors="*{Description}">Incorrect Description</p>
             <br>
-            <input type="text" name="login">
+            <input type="text" name="username">
             <br>
             <input type="submit" id="doUpdate" name="_eventId_updateData" value="Update now!" />
 

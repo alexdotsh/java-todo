@@ -7,11 +7,11 @@
     <body>
         <h1>Welcome to the home page!</h1>
         <table>
-            <th>Login</th>
+            <th>Username</th>
             <th:block th:each="user : ${users}">
 
                 <tr>
-                    <td th:text="${user.Login}">...</td>
+                    <td th:text="${user.Username}">...</td>
                     <td>
                         <table>
                             <ul>

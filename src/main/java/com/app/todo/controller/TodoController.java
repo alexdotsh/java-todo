@@ -48,21 +48,21 @@ public class TodoController {
     }
 
     @RequestMapping(value = "todos/create", method = RequestMethod.POST)
-    public String create(Model model, @Valid @ModelAttribute Todo todo, BindingResult bindingResult, @RequestParam String login) {
+    public String create(Model model, @Valid @ModelAttribute Todo todo, BindingResult bindingResult, @RequestParam String username) {
         User user;
 
-        Optional<User> searched_user = user_repository.findByLogin(login);
+        Optional<User> searched_user = user_repository.findByUsername(username);
         if(searched_user.isPresent())
             user = searched_user.get();
         else {
             user = new User();
-            user.setLogin(login);
+            user.setUsername(username);
             user_repository.save(user);
         }
 
         if(!bindingResult.hasErrors()){
             todo.setUser(user);
-            todo.setDescription(todo.getDescription()+user.getLogin());
+            todo.setDescription(todo.getDescription()+user.getUsername());
             todo_repository.save(todo);
             Iterable<Todo> todos = todo_repository.findAll();
 
