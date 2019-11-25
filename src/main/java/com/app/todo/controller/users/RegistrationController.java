@@ -31,9 +31,4 @@ public class RegistrationController {
         
         return "redirect:/";
     }
-
-    // @GetMapping({"/", "/welcome"})
-    // public String welcome(Model model) {
-    //     return "user/welcome";
-    // }
 }
