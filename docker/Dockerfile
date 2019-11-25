@@ -8,11 +8,11 @@ RUN apk add --no-cache \
 
 VOLUME /tmp
 
-ARG JAR_FILE
+ARG JAR
 
-COPY ${JAR_FILE} app.jar
+COPY ${JAR} /tmp/app.jar
 COPY docker/wait-for-it.sh /
 
 RUN chmod +x wait-for-it.sh
 
-ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/app.jar"]
+ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/tmp/app.jar"]
