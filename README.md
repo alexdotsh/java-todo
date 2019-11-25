@@ -7,9 +7,19 @@ Docker image is used for building a *Gradle build* environment. After a successf
 
 Set environment variables
 ```bash
-export DOCKER_IMAGE_NAME="jdk8-gradle-environment:0.0.1"
+DOCKER_IMAGE_NAME="jdk8-gradle-environment:0.0.1"
+PROJECT_DIRECTORY="$PWD"
+APP_NAME="jdk8-app:0.0.1"
+JAR_PATH="build/libs/"
+JAR_FILE="todo-0.0.1-SNAPSHOT.jar"
+JAR=$JAR_PATH$JAR_FILE
 
-export PROJECT_DIRECTORY="$PWD"
+export DOCKER_IMAGE_NAME
+export PROJECT_DIRECTORY
+export APP_NAME
+export JAR_PATH
+export JAR_FILE
+export JAR
 ```
 
 Build Gradle Docker image
@@ -17,7 +27,7 @@ Build Gradle Docker image
 docker build --rm -t "$DOCKER_IMAGE_NAME" -f ./docker/Dockerfile.build ./docker/.
 ```
 
-Run Gradle Docker container
+Run Gradle build
 ```bash
 docker volume create --name gradle-cache
 docker run --rm -v gradle-cache:/home/gradle/.gradle -v "$PROJECT_DIRECTORY":/home/gradle "$DOCKER_IMAGE_NAME" gradle build
@@ -25,29 +35,25 @@ docker run --rm -v gradle-cache:/home/gradle/.gradle -v "$PROJECT_DIRECTORY":/ho
 
 #### Deployable environment - Step 2
 
+a)
 This Docker image is used to copy the `libs/*-0.0.1-SNAPSHOT.jar` file (from step 1) into the image and be able launch/run it from within the container.
 
-Set environment variables(Please set variables from Step 1 too)
-
+Build image with `*.jar` file (From step 1)
 ```bash
-export APP_NAME="jdk8-app:0.0.1"
-
-export JAR_FILE="build/libs/todo-0.0.1-SNAPSHOT.jar"
+docker build --rm -t "$APP_NAME" --build-arg JAR="$JAR" -f ./docker/Dockerfile .
 ```
 
-Build App Docker image with `*.jar` file (From step 1)
+Run container with `*.jar` file (From step 1) mounted
 ```bash
-docker build --rm -t "$APP_NAME" --build-arg JAR_FILE="$JAR_FILE" -f ./docker/Dockerfile .
+docker run --rm -p 8080:8080 -v "$JAR:/tmp/app.jar" $APP_NAME
 ```
 
-Run App Docker container with `*.jar` file (From step 1) mounted
+b)
+Hot reload with docker-compose
 ```bash
-docker run --rm -p 8080:8080 -v "$JAR_FILE:/app.jar" $APP_NAME
-```
+docker-compose build && docker-compose up
 
-or run with docker-compose
-```bash
-docker-compose up
+docker run --rm -v gradle-cache:/home/gradle/.gradle -v "$PROJECT_DIRECTORY":/home/gradle "$DOCKER_IMAGE_NAME" gradle build; docker-compose restart app
 ```
 
 Access at:
