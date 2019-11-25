@@ -50,18 +50,7 @@ public class TodoController {
     public String create(Model model, @Valid @ModelAttribute Todo todo, BindingResult bindingResult) {
         User user;
 
-        Optional<User> searched_user = user_repository.findByLogin("test_login");
-        if(searched_user.isPresent())
-            user = searched_user.get();
-        else {
-            user = new User();
-            user.setLogin("test_login");
-            user_repository.save(user);
-        }
-
         if(!bindingResult.hasErrors()){
-            todo.setUser(user);
-            todo.setDescription(todo.getDescription()+user.getLogin());
             todo_repository.save(todo);
             Iterable<Todo> todos = todo_repository.findAll();
 

@@ -18,8 +18,6 @@ public class User {
     private String Email;
     private String password;
 
-    @NotBlank(message = "Name is mandatory")
-    private String login;
     @Transient
     private String passwordConfirm;
 
@@ -70,13 +68,5 @@ public class User {
 
     public void setPasswordConfirm(String passwordConfirm) {
         this.passwordConfirm = passwordConfirm;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
     }
 }

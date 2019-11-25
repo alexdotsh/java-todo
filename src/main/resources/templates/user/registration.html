@@ -8,19 +8,23 @@
         <h1>Welcome to the registration page!</h1>
 
         <br />
-        <form action="/users/registration" th:object="${user}" method="POST" enctype="utf8">
 
-            <input type="text" th:field="*{Name}" placeholder="Name" />
+        <div class="container"></div>
+            <form action="/registration" th:object="${user}" method="POST" enctype="utf8">
+                <input type="hidden" th:field="*{Id}" />
 
-            <input type="text" th:field="*{Username}" placeholder="Username" />
+                <input type="text" th:field="*{Name}" placeholder="Name" />
 
-            <input type="text" th:field="*{Email}" placeholder="Email" />
+                <input type="text" th:field="*{Username}" placeholder="Username" />
 
-            <input type="password" th:field="*{password}" placeholder="Password"></input>
+                <input type="text" th:field="*{Email}" placeholder="Email" />
 
-            <input type="password" th:field="*{passwordConfirm}" placeholder="Password Confirmation"></input>
+                <input type="password" th:field="*{password}" placeholder="Password" />
 
-            <button type="submit" th:text="Submit">Create account</button>
-        </form>
+                <input type="password" th:field="*{passwordConfirm}" placeholder="Password Confirmation" />
+
+                <button type="submit" th:text="Submit">Create account</button>
+            </form>
+        </div>
     </body>
 </html>
