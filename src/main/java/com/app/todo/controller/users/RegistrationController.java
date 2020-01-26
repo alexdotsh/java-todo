@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class RegistrationController {
     @Autowired
-    private UserRepository user_repository;
+    private UserRepository userRepository;
 
     @GetMapping("/registration")
     public String registration(Model model) {
@@ -27,7 +27,7 @@ public class RegistrationController {
             return "user/registration";
         }
 
-        user_repository.save(user);
+        userRepository.save(user);
         
         return "redirect:/";
     }

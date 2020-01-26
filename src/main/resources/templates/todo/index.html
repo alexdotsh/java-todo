@@ -6,6 +6,8 @@
     </head>
     <body>
         <h1>Welcome to the home page!</h1>
+        <h3><a th:href="@{registration}">Create an account</a></h3>
+        <!-- <h3><a href="">Login</a></h3> -->
         <table>
             <th:block th:each="todo : ${todos}">
                 <tr>
