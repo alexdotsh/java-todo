@@ -5,7 +5,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     </head>
     <body>
-        <h1>Welcome to the home page!</h1>
+        <h1>Welcome [[${principal.Username}]] to the todos page!</h1>
+        <p th:text="${principal.Username}"></p>
         <table>
             <th:block th:each="todo : ${todos}">
                 <tr>
