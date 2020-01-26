@@ -11,11 +11,24 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class RegistrationController {
     @Autowired
-    UserRepository user_repository;
+    private UserRepository userRepository;
 
-    @GetMapping("/users/registration")
+    @GetMapping("/registration")
     public String registration(Model model) {
+        model.addAttribute("user", new User());
+
+        return "user/registration";
+    }
+
+    @PostMapping("/registration")
+    public String registration(@ModelAttribute("user") User user, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return "user/registration";
+        }
+
+        userRepository.save(user);
         
-        return "registration";
+        return "redirect:/";
     }
 }

@@ -32,16 +32,6 @@ public class UserController {
 
         Iterable<User> users = user_repository.findAll();
 
-//        ArrayList<User> users = new ArrayList<User>(); //
-//        User user = new User();
-//        user.setLogin("login1");
-//        Set<Todo> todos = new HashSet<Todo>();
-//        Todo todo = new Todo();
-//        todo.setTitle("todo title");
-//        todos.add(todo);
-//        user.setTodos(todos);
-//        users.add(user);
-
         model.addAttribute("users", users);
 
         return "user/index";

@@ -24,8 +24,6 @@ public class Todo {
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "post_id", nullable = false)
-    //@OnDelete(action = OnDeleteAction.CASCADE)
-    //@JsonIgnore
     private User user;
 
     public int getId() {
