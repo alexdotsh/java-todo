@@ -5,13 +5,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     </head>
     <body>
-        <h1>Welcome to the home page!</h1>
+        <h1>Welcome [[${principal.Username}]] to the todos page!</h1>
+        <p th:text="${principal.Username}"></p>
         <table>
             <th:block th:each="todo : ${todos}">
                 <tr>
                     <td th:text="${todo.Title}">...</td>
                     <td th:text="${todo.Description}">...</td>
-                    <td th:text="${todo.User.login}">...</td>
+                    <td th:text="${todo.User.Username}">...</td>
                     <td>
                         <form th:object="${todo}" th:method="GET" th:action="@{/todos/{id}/update(id=${todo.id})}">
                             <input type="submit" value="update">
