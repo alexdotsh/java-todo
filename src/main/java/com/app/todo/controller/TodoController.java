@@ -54,12 +54,12 @@ public class TodoController {
     public String create(Model model, @Valid @ModelAttribute Todo todo, BindingResult bindingResult, @RequestParam String username) {
         User user;
 
-        Optional<User> searched_user = user_repository.findByLogin("test_login");
+        Optional<User> searched_user = user_repository.findByUsername("test_login");
         if(searched_user.isPresent())
             user = searched_user.get();
         else {
             user = new User();
-            user.setLogin("test_login");
+            user.setUsername("test_login");
             user_repository.save(user);
         }
 
