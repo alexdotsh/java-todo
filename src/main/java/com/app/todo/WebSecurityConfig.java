@@ -1,5 +1,6 @@
 package com.app.todo;
 
+import com.app.todo.services.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,12 +23,14 @@ import java.io.IOException;
 @Configuration
 @EnableWebSecurity(debug = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
     private UserDetailsService userDetailsService;
 
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService);
         auth.inMemoryAuthentication().withUser("domin").password(passwordEncoder().encode("ddd")).roles("ADMIN");
         auth.inMemoryAuthentication().withUser("ravan").password("ravan123").roles("USER");
         auth.inMemoryAuthentication().withUser("kans").password("kans123").roles("USER");
@@ -51,6 +54,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .logout()
+                .logoutUrl("/users/logout")
+                .deleteCookies("JSESSIONID")
                 .permitAll();
     }
 
