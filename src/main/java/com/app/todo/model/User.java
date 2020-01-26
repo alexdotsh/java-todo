@@ -14,24 +14,41 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 public class User {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
     @NotBlank(message = "Name is mandatory")
-    private String login;
+    private String username;
+    private String email;
+    private String password;
 
-    public int getId() { return id; }
+    @Transient
+    private String passwordConfirm;
 
-    public void setId(int id) {
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @OneToMany(/*cascade = CascadeType.ALL, */fetch = FetchType.LAZY, mappedBy = "user")

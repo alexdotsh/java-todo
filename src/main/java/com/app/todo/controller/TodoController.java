@@ -6,6 +6,8 @@ import com.app.todo.repository.TodoRepository;
 import com.app.todo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Validator;
@@ -36,8 +38,9 @@ public class TodoController {
     public String index(Model model) {
 
         Iterable<Todo> todos = todo_repository.findAll();
-
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("todos", todos);
+        model.addAttribute("principal", auth.getPrincipal());
 
         return "todo/index";
     }
@@ -48,23 +51,21 @@ public class TodoController {
     }
 
     @RequestMapping(value = "todos/create", method = RequestMethod.POST)
-    public String create(Model model, @Valid @ModelAttribute Todo todo, BindingResult bindingResult, @RequestParam String login) {
+    public String create(Model model, @Valid @ModelAttribute Todo todo, BindingResult bindingResult, @RequestParam String username) {
         User user;
 
-        Optional<User> searched_user = user_repository.findByLogin(login);
+        Optional<User> searched_user = user_repository.findByUsername(username);
         if(searched_user.isPresent())
             user = searched_user.get();
-        else{
+        else {
             user = new User();
-            user.setLogin(login);
+            user.setUsername(username);
             user_repository.save(user);
         }
 
-
-
         if(!bindingResult.hasErrors()){
             todo.setUser(user);
-            todo.setDescription(todo.getDescription()+user.getLogin());
+            todo.setDescription(todo.getDescription()+user.getUsername());
             todo_repository.save(todo);
             Iterable<Todo> todos = todo_repository.findAll();
 
