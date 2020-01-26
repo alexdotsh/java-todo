@@ -9,13 +9,14 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @Entity
+@Table(name = "user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String Name;
-    private String Username;
     private String Email;
+    private String Username;
     private String password;
 
     @Transient
@@ -38,20 +39,20 @@ public class User {
         this.Name = Name;
     }
 
-    public String getUsername() {
-        return Username;
-    }
-
-    public void setUsername(String Username) {
-        this.Username = Username;
-    }
-
     public String getEmail() {
         return Email;
     }
 
     public void setEmail(String Email) {
         this.Email = Email;
+    }
+
+    public String getUsername() {
+        return Username;
+    }
+
+    public void setUsername(String Username) {
+        this.Username = Username;
     }
 
     public String getPassword() {

@@ -53,7 +53,7 @@ Hot reload with docker-compose
 ```bash
 docker-compose build && docker-compose up
 
-docker run --rm -v gradle-cache:/home/gradle/.gradle -v "$PROJECT_DIRECTORY":/home/gradle "$DOCKER_IMAGE_NAME" gradle build; docker-compose restart app
+docker run --rm -v gradle-cache:/home/gradle/.gradle -v "$PROJECT_DIRECTORY":/home/gradle "$DOCKER_IMAGE_NAME" gradle build && docker-compose restart app
 ```
 
 Access at:

@@ -4,6 +4,9 @@ plugins {
 	id 'java'
 }
 
+
+apply plugin: 'io.spring.dependency-management'  
+
 group = 'com.app'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
@@ -21,13 +24,20 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
 	compile 'mysql:mysql-connector-java:8.0.14'
-	compileOnly('org.projectlombok:lombok')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
-	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile 'org.springframework.security:spring-security-core'
+	compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	testCompile 'org.springframework.boot:spring-boot-starter-test'
 
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'io.projectreactor:reactor-test'
+	testImplementation 'org.springframework.security:spring-security-test'
 }
