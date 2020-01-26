@@ -12,9 +12,6 @@
         <div class="container"></div>
             <form action="/registration" th:object="${user}" method="POST" enctype="utf8">
                 <input type="hidden" th:field="*{Id}" />
-
-                <input type="text" th:field="*{Name}" placeholder="Name" />
-
                 <input type="text" th:field="*{Username}" placeholder="Username" />
 
                 <input type="text" th:field="*{Email}" placeholder="Email" />
