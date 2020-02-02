@@ -54,18 +54,18 @@ public class TodoController {
     public String create(Model model, @Valid @ModelAttribute Todo todo, BindingResult bindingResult, @RequestParam String username) {
         User user;
 
-        Optional<User> searched_user = user_repository.findByUsername(username);
+        Optional<User> searched_user = user_repository.findByUsername("test_login");
         if(searched_user.isPresent())
             user = searched_user.get();
         else {
             user = new User();
-            user.setUsername(username);
+            user.setUsername("test_login");
             user_repository.save(user);
         }
 
         if(!bindingResult.hasErrors()){
             todo.setUser(user);
-            todo.setDescription(todo.getDescription()+user.getUsername());
+            todo.setDescription(todo.getDescription());
             todo_repository.save(todo);
             Iterable<Todo> todos = todo_repository.findAll();
 
