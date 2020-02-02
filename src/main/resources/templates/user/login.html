@@ -1,21 +1,20 @@
-<html>
-<head></head>
-<body>
-<h1>Login</h1>
-<form name='f' action="/users/login" method='POST'>
-    <table>
-        <tr>
-            <td>User:</td>
-            <td><input type='text' name='username' value=''></td>
-        </tr>
-        <tr>
-            <td>Password:</td>
-            <td><input type='password' name='password' /></td>
-        </tr>
-        <tr>
-            <td><input name="submit" type="submit" value="submit" /></td>
-        </tr>
-    </table>
-</form>
-</body>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Login page</title>
+        <link th:href="@{/public/style.css}" rel="stylesheet" />
+    </head>
+    <body>
+        <div id="container">
+            <h2>Login page</h2>
+            <form action="/users/login" method="post">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" autofocus="autofocus" />
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" />
+                <input id="submit" type="submit" value="Log in" />
+            </form>
+            <p th:if="${loginError}" class="error">Wrong user or password</p>
+        </div>
+    </body>
 </html>
