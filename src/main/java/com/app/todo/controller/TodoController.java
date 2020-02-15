@@ -1,25 +1,36 @@
 package com.app.todo.controller;
 
+import com.app.todo.model.MyPrincipal;
 import com.app.todo.model.Todo;
 import com.app.todo.model.User;
 import com.app.todo.repository.TodoRepository;
 import com.app.todo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import javax.swing.*;
 import javax.validation.Valid;
 
 import javax.validation.groups.Default;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -34,13 +45,43 @@ public class TodoController {
     @Autowired
     Validator validator;
 
+    @Autowired
+    private OAuth2AuthorizedClientService authorizedClientService;
+
+//    @GetMapping("/loginSuccess")
+//    public String getLoginInfo(Model model, OAuth2AuthenticationToken authentication) {
+//        OAuth2AuthorizedClient client = authorizedClientService
+//                .loadAuthorizedClient(
+//                        authentication.getAuthorizedClientRegistrationId(),
+//                        authentication.getName());
+//
+//        String userInfoEndpointUri = client.getClientRegistration()
+//                .getProviderDetails().getUserInfoEndpoint().getUri();
+//
+//        if (!StringUtils.isEmpty(userInfoEndpointUri)) {
+//            RestTemplate restTemplate = new RestTemplate();
+//            HttpHeaders headers = new HttpHeaders();
+//            headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + client.getAccessToken()
+//                    .getTokenValue());
+//            HttpEntity entity = new HttpEntity("", headers);
+//            ResponseEntity<Map> response = restTemplate
+//                    .exchange(userInfoEndpointUri, HttpMethod.GET, entity, Map.class);
+//            Map userAttributes = response.getBody();
+//            model.addAttribute("name", userAttributes.get("name"));
+//        }
+//
+//        int aaa = 4;
+//        return "loginSuccess";
+//    }
+
     @RequestMapping(value ={"/todos", "/"}, method = RequestMethod.GET)
     public String index(Model model) {
 
         Iterable<Todo> todos = todo_repository.findAll();
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        MyPrincipal principal = (MyPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         model.addAttribute("todos", todos);
-        model.addAttribute("principal", auth.getPrincipal());
+        model.addAttribute("principal", principal);
 
         return "todo/index";
     }
