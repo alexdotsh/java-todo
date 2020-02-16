@@ -9,9 +9,9 @@ import java.util.Collection;
 import java.util.List;
 
 public class LocalPrincipal implements UserDetails, MyPrincipal {
-    private User user;
+    private LocalUser user;
 
-    public LocalPrincipal(User user) {
+    public LocalPrincipal(LocalUser user) {
         this.user = user;
     }
 

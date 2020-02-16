@@ -28,6 +28,8 @@ public class MyOAuth2UserService implements OAuth2UserService<OAuth2UserRequest,
         OAuth2User oAuth2Useruser = myOAuth2UserService.loadUser(userRequest);
         FacebookPrincipal facebookPrincipal = new FacebookPrincipal(oAuth2Useruser);
 
+
+
         return facebookPrincipal;
     }
 }
