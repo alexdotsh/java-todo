@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 
 @Entity
-@NoArgsConstructor
 @DiscriminatorValue(value = "Facebook")
 public class FacebookUser extends User implements MyPrincipal, OAuth2User{
 
