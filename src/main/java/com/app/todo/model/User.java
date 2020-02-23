@@ -14,6 +14,7 @@ import java.util.Set;
 @NoArgsConstructor
 @DiscriminatorColumn(name = "type")
 @Entity
+@Table(uniqueConstraints={@UniqueConstraint(columnNames = {"type", "externalId"})})
 public class User {
     @Column(insertable = false, updatable = false)
     private String type;
@@ -40,7 +41,6 @@ public class User {
         this.externalId = externalId;
     }
 
-
     public Long getId() {
         return id;
     }
@@ -56,9 +56,6 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
-
-
-
 
     public Set<Todo> getTodos() { return Todos; }
 

@@ -60,20 +60,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .permitAll();
 
         http.authorizeRequests()
+                //.antMatchers("/users/login/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
+                .formLogin()
+                .and()
                 .oauth2Login()
-                //.userDetailsService(userDetailsService)
                 .userInfoEndpoint()
-                .userService(myOAuth2UserService);
-                //.redirectionEndpoint()
-                //.baseUri("/?aaaa=3");
-
+                .userService(myOAuth2UserService)
+                .and()
+                .and()
+                .logout()
+                .logoutUrl("/users/logout")
+                .deleteCookies("JSESSIONID");
     }
-
-
-
-
-
 }
 
