@@ -27,7 +27,6 @@ import static org.mockito.Mockito.*;
 
 public class MyOauth2UserServiceTest {
 
-
     @Spy
     private UserRepository userRepository;// = mock(UserRepository.class);
 
@@ -41,8 +40,6 @@ public class MyOauth2UserServiceTest {
     public void initMocks(){
         MockitoAnnotations.initMocks(this);
     }
-
-
 
     @Test
     public void whenFindByName_thenReturnEmployee() {
@@ -69,5 +66,4 @@ public class MyOauth2UserServiceTest {
 
         verify(this.userRepository, times(0)).save(any());
     }
-
 }

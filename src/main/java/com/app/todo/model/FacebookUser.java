@@ -13,8 +13,11 @@ import java.util.List;
 import java.util.Map;
 
 @Entity
+@NoArgsConstructor
 @DiscriminatorValue(value = "Facebook")
 public class FacebookUser extends User implements MyPrincipal, OAuth2User{
+
+    public FacebookUser(){}
 
     public FacebookUser(OAuth2User oAuth2User) {
         this.setUsername((String)oAuth2User.getAttributes().get("name"));
@@ -23,16 +26,6 @@ public class FacebookUser extends User implements MyPrincipal, OAuth2User{
     }
 
     private String Name;
-    private String ExternalId;
-
-    public String getExternalId() {
-        return ExternalId;
-    }
-
-    public void setExternalId(String externalId) {
-        this.ExternalId = ExternalId;
-    }
-
     @Override
     public String getLogin() {
         return getUsername();

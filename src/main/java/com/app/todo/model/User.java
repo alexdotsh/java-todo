@@ -30,6 +30,16 @@ public class User {
     @OneToMany(/*cascade = CascadeType.ALL, */fetch = FetchType.LAZY, mappedBy = "user")
     private Set<Todo> Todos;
 
+    private String externalId;
+
+    public String getExternalId() {
+        return externalId;
+    }
+
+    public void setExternalId(String externalId) {
+        this.externalId = externalId;
+    }
+
 
     public Long getId() {
         return id;
