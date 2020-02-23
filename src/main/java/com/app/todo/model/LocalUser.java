@@ -14,7 +14,6 @@ public class LocalUser extends User{
     @Transient
     private String passwordConfirm;
 
-
     public String getPassword() {
         return password;
     }
@@ -37,5 +36,10 @@ public class LocalUser extends User{
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setUsername(String username) {
+        super.setUsername(username);
+        setExternalId(username);
     }
 }
