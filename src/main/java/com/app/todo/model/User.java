@@ -6,7 +6,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Getter
@@ -18,9 +17,6 @@ import java.util.Set;
 public class User {
     @Column(insertable = false, updatable = false)
     private String type;
-//    public String getType() {
-//        return type;
-//    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +24,7 @@ public class User {
     @NotBlank(message = "Name is mandatory")
     private String username;
 
-    @OneToMany(/*cascade = CascadeType.ALL, */fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private Set<Todo> Todos;
 
     private String externalId;
@@ -62,5 +58,4 @@ public class User {
     public void setTodos(Set<Todo> Todos) {
         this.Todos = Todos;
     }
-
 }

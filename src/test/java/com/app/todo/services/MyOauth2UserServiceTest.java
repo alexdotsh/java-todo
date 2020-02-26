@@ -1,29 +1,19 @@
 package com.app.todo.services;
 
-
-import com.app.todo.Helpers.TestClientRegistrations;
 import com.app.todo.model.FacebookUser;
-import com.app.todo.model.User;
 import com.app.todo.repository.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
-import org.springframework.boot.test.mock.mockito.SpyBean;
-import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
-import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
-import java.time.Instant;
 import java.util.Map;
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
-
 
 public class MyOauth2UserServiceTest {
 
@@ -57,8 +47,6 @@ public class MyOauth2UserServiceTest {
         OAuth2UserRequest oAuth2UserRequest = mock(OAuth2UserRequest.class);
         OAuth2User oAuth2User = mock(OAuth2User.class);
         when(oAuth2User.getAttributes()).thenReturn(Map.of("id","eqweweq", "name", "dddd"));
-        //Optional<User> facebookUser = Optional.of(mock(FacebookUser.class));
-        //Optional<User> user = facebookUser;
         when(userRepository.findByTypeAndExternalId("Facebook", "eqweweq")).thenReturn(Optional.of(mock(FacebookUser.class)));
         when(defaultOAuth2UserServiceMock.loadUser(oAuth2UserRequest)).thenReturn(oAuth2User);
 
