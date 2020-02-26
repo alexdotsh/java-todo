@@ -5,7 +5,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     </head>
     <body>
-        <h1>Welcome  [[${principal.Login}]] to the todos page!</h1>
+        <div th:if="${principal.Login}">
+            <h1>Welcome  [[${principal.Login}]] to the todos page!</h1>
+        </div>
         <h3><a th:href="@{registration}">Create an account</a></h3>
 
         <table>

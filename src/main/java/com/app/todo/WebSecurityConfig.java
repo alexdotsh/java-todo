@@ -4,11 +4,9 @@ import com.app.todo.services.MyOAuth2UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -17,36 +15,26 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserDetailsService userDetailsService;
-
-    @Autowired
     private MyOAuth2UserService myOAuth2UserService;
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService);
-    }
-
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+    public PasswordEncoder passwordEncoder() { return new BCryptPasswordEncoder(); }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/registration").permitAll()
-                .anyRequest().authenticated()
-                .and()
+            .antMatchers("/registration", "/", "/login**").permitAll()
+            .anyRequest().authenticated()
+            .and()
                 .formLogin()
-                .and()
+            .and()
                 .oauth2Login()
-                .userInfoEndpoint()
-                .userService(myOAuth2UserService)
-                .and()
-                .and()
-                .logout()
-                .logoutUrl("/users/logout")
-                .deleteCookies("JSESSIONID");
+            .userInfoEndpoint()
+            .userService(myOAuth2UserService)
+            .and()
+            .and()
+            .logout()
+            .logoutUrl("/users/logout")
+            .deleteCookies("JSESSIONID");
     }
 }
