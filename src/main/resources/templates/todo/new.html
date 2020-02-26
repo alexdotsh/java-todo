@@ -19,6 +19,9 @@
             <br>
             <input type="text" name="username">
             <br>
+            <input type="hidden"
+                   th:name="${_csrf.parameterName}"
+                   th:value="${_csrf.token}" />
             <input type="submit" id="doUpdate" name="_eventId_updateData" value="Update now!" />
 
         </form>
