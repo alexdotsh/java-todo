@@ -35,32 +35,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //http.debug(trur);
-//        http.csrf().disable()
-//                .authorizeRequests()
-//                .antMatchers(
-//                        "/resources/**",
-//                        "/login/registration",
-//                        "/registration/**",
-//                        "/registration",
-//                        "/login/**").permitAll()
-//                .anyRequest().authenticated()
-//                .and()
-//                .formLogin()
-//                .loginPage("/users/login")
-//                .permitAll()
-//                .and()
-//                .logout()
-//                .logoutUrl("/users/logout")
-//                .deleteCookies("JSESSIONID")
-//                .permitAll();
-
         http.authorizeRequests()
-                //.antMatchers("/users/login/**").permitAll()
+                .antMatchers("/registration").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -75,4 +53,3 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .deleteCookies("JSESSIONID");
     }
 }
-
