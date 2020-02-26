@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class MyUserPrincipal implements UserDetails {
-    private User user;
+public class LocalPrincipal implements UserDetails, MyPrincipal {
+    private LocalUser user;
 
-    public MyUserPrincipal(User user) {
+    public LocalPrincipal(LocalUser user) {
         this.user = user;
     }
 
@@ -23,6 +23,9 @@ public class MyUserPrincipal implements UserDetails {
         authorities.add(admin);
         return authorities;
     }
+
+    @Override
+    public String getLogin() { return user.getUsername(); }
 
     @Override
     public String getPassword() {
