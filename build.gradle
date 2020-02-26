@@ -19,6 +19,8 @@ repositories {
 	mavenCentral()
 }
 
+ext['spring-security.version']='5.2.2.RELEASE'
+
 dependencies {
 	implementation('org.springframework.boot:spring-boot-starter-web')
 	compile("org.springframework.boot:spring-boot-starter-thymeleaf")
