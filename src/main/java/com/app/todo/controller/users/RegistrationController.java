@@ -1,6 +1,6 @@
 package com.app.todo.controller.users;
 
-import com.app.todo.model.User;
+import com.app.todo.model.LocalUser;
 import com.app.todo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,13 +19,13 @@ public class RegistrationController {
 
     @GetMapping("/registration")
     public String registration(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new LocalUser());
 
         return "user/registration";
     }
 
     @PostMapping("/registration")
-    public String registration(@ModelAttribute("user") User user, BindingResult bindingResult) {
+    public String registration(@ModelAttribute("user") LocalUser user, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return "user/registration";
