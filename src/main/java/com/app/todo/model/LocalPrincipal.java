@@ -17,7 +17,6 @@ public class LocalPrincipal implements UserDetails, MyPrincipal {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        //return null;
         GrantedAuthority admin = new SimpleGrantedAuthority("ADMIN");
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
         authorities.add(admin);
@@ -56,5 +55,4 @@ public class LocalPrincipal implements UserDetails, MyPrincipal {
     public boolean isEnabled() {
         return true;
     }
-    //...
 }
