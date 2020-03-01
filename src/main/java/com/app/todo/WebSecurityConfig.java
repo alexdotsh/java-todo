@@ -18,12 +18,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private MyOAuth2UserService myOAuth2UserService;
 
     @Bean
-    public PasswordEncoder passwordEncoder() { return new BCryptPasswordEncoder(); }
+    public BCryptPasswordEncoder bCryptPasswordEncoder() { return new BCryptPasswordEncoder(); }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-            .antMatchers("/registration", "/", "/login**").permitAll()
+        http.csrf().disable()
+            .authorizeRequests()
+            .antMatchers("/", "/registration", "/login").permitAll()
             .anyRequest().authenticated()
             .and()
                 .formLogin()

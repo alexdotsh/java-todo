@@ -15,10 +15,6 @@ import java.util.Optional;
 @Service
 public class MyUserDetailsService implements UserDetailsService {
 
-    public MyUserDetailsService(){
-        System.out.println("MyUserDetailsService");
-    }
-
     @Autowired
     private UserRepository userRepository;
 

@@ -1,12 +1,12 @@
 package com.app.todo.controller;
 
-import com.app.todo.model.MyPrincipal;
+//import com.app.todo.model.MyPrincipal;
 import com.app.todo.model.Todo;
 import com.app.todo.model.User;
 import com.app.todo.repository.TodoRepository;
 import com.app.todo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,13 +35,13 @@ public class TodoController {
     private OAuth2AuthorizedClientService authorizedClientService;
 
     @RequestMapping(value ={"/todos", "/"}, method = RequestMethod.GET)
-    public String index(Model model) {
+    public String index(Model model, Authentication authentication) {
 
         Iterable<Todo> todos = todo_repository.findAll();
-        MyPrincipal principal = (MyPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        MyPrincipal principal = (MyPrincipal)authentication.getPrincipal();
 
         model.addAttribute("todos", todos);
-        model.addAttribute("principal", principal);
+//        model.addAttribute("principal", principal);
 
         return "todo/index";
     }
@@ -54,15 +54,7 @@ public class TodoController {
     @RequestMapping(value = "todos/create", method = RequestMethod.POST)
     public String create(Model model, @Valid @ModelAttribute Todo todo, BindingResult bindingResult, @RequestParam String username) {
         User user;
-
-        Optional<User> searched_user = user_repository.findByUsername("test_login");
-        if (searched_user.isPresent())
-              user = searched_user.get();
-        else {
-            user = new User();
-            user.setUsername("test_login");
-            user_repository.save(user);
-        }
+        user = new User();
 
         if (!bindingResult.hasErrors()){
             todo.setUser(user);
