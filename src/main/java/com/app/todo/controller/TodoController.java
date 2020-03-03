@@ -7,6 +7,8 @@ import com.app.todo.repository.TodoRepository;
 import com.app.todo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,13 +54,16 @@ public class TodoController {
     }
 
     @RequestMapping(value = "todos/create", method = RequestMethod.POST)
-    public String create(Model model, @Valid @ModelAttribute Todo todo, BindingResult bindingResult, @RequestParam String username) {
-        User user;
-        user = new User();
+    public String create(Model model, @Valid @ModelAttribute Todo todo, BindingResult bindingResult) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = ((UserDetails)principal).getUsername();
+
+        User user = user_repository.findByUsername(username);
 
         if (!bindingResult.hasErrors()){
-            todo.setUser(user);
+            todo.setTitle(todo.getTitle());
             todo.setDescription(todo.getDescription());
+            todo.setUser(user);
             todo_repository.save(todo);
             Iterable<Todo> todos = todo_repository.findAll();
 
@@ -69,7 +74,7 @@ public class TodoController {
     }
 
     @RequestMapping(value = "todos/{Id}/update", method = RequestMethod.GET)
-    public String updateTodo(@PathVariable int Id, Model model) {
+    public String updateTodo(@PathVariable Long Id, Model model) {
         Optional<Todo> maybe_todo = todo_repository.findById(Id);
         Todo todo = maybe_todo.get();
         model.addAttribute("todo", todo);
@@ -78,7 +83,7 @@ public class TodoController {
     }
 
     @RequestMapping(value = "todos/{Id}", method = RequestMethod.DELETE)
-    public String deleteTodo(@PathVariable int Id) {
+    public String deleteTodo(@PathVariable Long Id) {
 
         todo_repository.deleteById(Id);
         return "redirect:/";

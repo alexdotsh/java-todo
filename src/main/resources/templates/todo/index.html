@@ -9,8 +9,8 @@
             <table>
                 <th:block th:each="todo : ${todos}">
                     <tr>
-                        <td th:text="${todo.Title}">...</td>
-                        <td th:text="${todo.Description}">...</td>
+                        <td th:text="${todo.title}">...</td>
+                        <td th:text="${todo.description}">...</td>
                         <td th:text="${todo.User.Username}">...</td>
                         <td>
                             <form th:object="${todo}" th:method="GET" th:action="@{/todos/{id}/update(id=${todo.id})}">
