@@ -1,12 +1,10 @@
 package com.app.todo.controller;
 
-//import com.app.todo.model.MyPrincipal;
 import com.app.todo.model.Todo;
 import com.app.todo.model.User;
 import com.app.todo.repository.TodoRepository;
 import com.app.todo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
@@ -36,19 +34,16 @@ public class TodoController {
     @Autowired
     private OAuth2AuthorizedClientService authorizedClientService;
 
-    @RequestMapping(value ={"/todos", "/"}, method = RequestMethod.GET)
-    public String index(Model model, Authentication authentication) {
-
+    @GetMapping({"/", "/todos"})
+    public String index(Model model) {
         Iterable<Todo> todos = todo_repository.findAll();
-//        MyPrincipal principal = (MyPrincipal)authentication.getPrincipal();
 
         model.addAttribute("todos", todos);
-//        model.addAttribute("principal", principal);
 
         return "todo/index";
     }
 
-    @RequestMapping(value = "todos/new", method = RequestMethod.GET)
+    @GetMapping("todos/new")
     public String newTodo(Todo todo) {
         return "todo/new";
     }
@@ -65,7 +60,6 @@ public class TodoController {
             todo.setDescription(todo.getDescription());
             todo.setUser(user);
             todo_repository.save(todo);
-            Iterable<Todo> todos = todo_repository.findAll();
 
             return "redirect:/";
         } else {
