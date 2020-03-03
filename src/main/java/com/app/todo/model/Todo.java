@@ -13,8 +13,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 public class Todo {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotBlank(message = "Name is mandatory")
     private String Title;
@@ -22,15 +23,15 @@ public class Todo {
     @Size(min= 10, message = "Description need to be longer")
     private String Description;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "post_id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade=CascadeType.ALL)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -50,7 +51,7 @@ public class Todo {
         this.Description = Description;
     }
 
-    public User getUser() {return user;}
+    public User getUser() { return user; }
 
     public void setUser(User user) { this.user = user; }
 }
