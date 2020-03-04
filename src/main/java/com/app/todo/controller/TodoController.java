@@ -22,8 +22,6 @@ public class TodoController {
     @Autowired
     private TodoRepository todo_repository;
     @Autowired
-    private UserRepository user_repository;
-    @Autowired
     Validator validator;
     @Autowired
     private OAuth2AuthorizedClientService authorizedClientService;
@@ -40,12 +38,10 @@ public class TodoController {
     }
 
     @GetMapping("todos/new")
-    public String newTodo(Todo todo) {
-        return "todo/new";
-    }
+    public String newTodo(Todo todo) { return "todo/new"; }
 
     @RequestMapping(value = "todos/create", method = RequestMethod.POST)
-    public String create(Model model, @Valid @ModelAttribute Todo todo, BindingResult bindingResult) {
+    public String create(@Valid @ModelAttribute Todo todo, BindingResult bindingResult) {
 
         if (!bindingResult.hasErrors()){
             todoService.save(todo);
