@@ -5,6 +5,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     </head>
     <body>
+        <h4>Welcome: <span sec:authentication="name">Bob</span></h4>
+        
         <div>
             <table>
                 <th:block th:each="todo : ${todos}">
@@ -32,21 +34,13 @@
                 </form>
             </div>
 
-            <div>
-                <p>
-                    <a th:href="@{login}">Login</a>
-                </p>
-            </div>
-            <div>
-                <p>
-                    <a th:href="@{registration}">Create an account</a>
-                </p>
+            <div sec:authorize="isAuthenticated()">
+                <a class="btn btn-success"th:href="@{/users/logout}">Sign out</a>
             </div>
 
-            <div>
-                <form method="POST" action="/users/logout">
-                    <input type="submit" value="logout">
-                </form>
+            <div sec:authorize="isAnonymous()">
+                <a class="btn btn-success" th:href="@{/login}">Login</a>
+                <a class="btn btn-primary" th:href="@{/registration}">Register</a>
             </div>
         </div>
     </body>
