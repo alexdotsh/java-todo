@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 public class RegistrationController {
     @Autowired
     private UserService userService;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
 
