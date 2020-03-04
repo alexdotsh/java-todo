@@ -1,12 +1,10 @@
 package com.app.todo.controller;
 
 import com.app.todo.model.Todo;
-import com.app.todo.model.User;
 import com.app.todo.repository.TodoRepository;
 import com.app.todo.repository.UserRepository;
+import com.app.todo.services.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,18 +19,16 @@ import java.util.Optional;
 
 @Controller
 public class TodoController {
-
     @Autowired
     private TodoRepository todo_repository;
-
     @Autowired
     private UserRepository user_repository;
-
     @Autowired
     Validator validator;
-
     @Autowired
     private OAuth2AuthorizedClientService authorizedClientService;
+    @Autowired
+    private TodoService todoService;
 
     @GetMapping({"/", "/todos"})
     public String index(Model model) {
@@ -50,16 +46,9 @@ public class TodoController {
 
     @RequestMapping(value = "todos/create", method = RequestMethod.POST)
     public String create(Model model, @Valid @ModelAttribute Todo todo, BindingResult bindingResult) {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username = ((UserDetails)principal).getUsername();
-
-        User user = user_repository.findByUsername(username);
 
         if (!bindingResult.hasErrors()){
-            todo.setTitle(todo.getTitle());
-            todo.setDescription(todo.getDescription());
-            todo.setUser(user);
-            todo_repository.save(todo);
+            todoService.save(todo);
 
             return "redirect:/";
         } else {
