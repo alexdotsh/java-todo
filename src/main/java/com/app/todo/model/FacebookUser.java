@@ -16,12 +16,11 @@ import java.util.Map;
 @DiscriminatorValue(value = "Facebook")
 public class FacebookUser extends User implements MyPrincipal, OAuth2User{
 
-    public FacebookUser(){}
+    public FacebookUser() { }
 
     public FacebookUser(OAuth2User oAuth2User) {
         this.setUsername((String)oAuth2User.getAttributes().get("name"));
         this.setExternalId((String)oAuth2User.getAttributes().get("id"));
-
     }
 
     private String Name;
