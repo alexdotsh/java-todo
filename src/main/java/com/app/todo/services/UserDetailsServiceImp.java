@@ -1,6 +1,5 @@
 package com.app.todo.services;
 
-import com.app.todo.model.LocalUser;
 import com.app.todo.model.User;
 import com.app.todo.model.Role;
 import com.app.todo.repository.UserRepository;
