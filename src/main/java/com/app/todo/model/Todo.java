@@ -20,7 +20,7 @@ public class Todo {
     @NotBlank(message = "Name is mandatory")
     private String Title;
 
-    @Size(min= 10, message = "Description need to be longer")
+    @Size(min = 5, message = "Description need to be longer")
     private String Description;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade=CascadeType.ALL)
