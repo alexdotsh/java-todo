@@ -1,0 +1,4 @@
+spring.security.oauth2.client.registration.facebook.client-id=203303470797393
+spring.security.oauth2.client.registration.facebook.client-secret=161d6ce1ce516de61a6bd780000a88c8
+spring.security.oauth2.client.registration.google.client-id=203303470797393
+spring.security.oauth2.client.registration.google.client-secret=161d6ce1ce516de61a6b
