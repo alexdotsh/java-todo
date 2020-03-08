@@ -23,7 +23,7 @@ public class Todo {
     @Size(min = 5, message = "Description need to be longer")
     private String Description;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade=CascadeType.ALL)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
