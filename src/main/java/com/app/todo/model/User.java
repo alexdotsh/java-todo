@@ -31,7 +31,7 @@ public class User {
     @Transient
     private String passwordConfirm;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Todo> todos;
 
     @ManyToMany

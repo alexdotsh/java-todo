@@ -2,7 +2,6 @@ package com.app.todo.controller;
 
 import com.app.todo.model.Todo;
 import com.app.todo.repository.TodoRepository;
-import com.app.todo.repository.UserRepository;
 import com.app.todo.services.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
@@ -40,7 +39,7 @@ public class TodoController {
     @GetMapping("todos/new")
     public String newTodo(Todo todo) { return "todo/new"; }
 
-    @RequestMapping(value = "todos/create", method = RequestMethod.POST)
+    @PostMapping("todos/create")
     public String create(@Valid @ModelAttribute Todo todo, BindingResult bindingResult) {
 
         if (!bindingResult.hasErrors()){
@@ -61,7 +60,7 @@ public class TodoController {
         return "todo/new";
     }
 
-    @RequestMapping(value = "todos/{Id}", method = RequestMethod.DELETE)
+    @GetMapping("todos/{Id}/delete")
     public String deleteTodo(@PathVariable Long Id) {
 
         todo_repository.deleteById(Id);
