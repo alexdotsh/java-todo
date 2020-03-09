@@ -26,4 +26,7 @@ public class TodoServiceImp implements TodoService {
         todo.setUser(user);
         todoRepository.save(todo);
     }
+
+    @Override
+    public void delete(Long Id) { todoRepository.deleteById(Id); }
 }
