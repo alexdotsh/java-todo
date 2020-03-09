@@ -14,12 +14,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 @Controller
 public class TodoController {
     @Autowired
-    private TodoRepository todo_repository;
+    private TodoRepository todoRepository;
     @Autowired
     Validator validator;
     @Autowired
@@ -29,7 +28,7 @@ public class TodoController {
 
     @GetMapping({"/", "/todos"})
     public String index(Model model) {
-        Iterable<Todo> todos = todo_repository.findAll();
+        Iterable<Todo> todos = todoRepository.findAll();
 
         model.addAttribute("todos", todos);
 
@@ -41,7 +40,6 @@ public class TodoController {
 
     @PostMapping("todos/create")
     public String create(@Valid @ModelAttribute Todo todo, BindingResult bindingResult) {
-
         if (!bindingResult.hasErrors()){
             todoService.save(todo);
 
@@ -53,8 +51,7 @@ public class TodoController {
 
     @RequestMapping(value = "todos/{Id}/update", method = RequestMethod.GET)
     public String updateTodo(@PathVariable Long Id, Model model) {
-        Optional<Todo> maybe_todo = todo_repository.findById(Id);
-        Todo todo = maybe_todo.get();
+        Todo todo = todoRepository.findById(Id).get();
         model.addAttribute("todo", todo);
 
         return "todo/new";
@@ -62,8 +59,8 @@ public class TodoController {
 
     @GetMapping("todos/{Id}/delete")
     public String deleteTodo(@PathVariable Long Id) {
+        todoService.delete(Id);
 
-        todo_repository.deleteById(Id);
         return "redirect:/";
     }
 }

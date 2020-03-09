@@ -1,6 +1,5 @@
 package com.app.todo.services;
 
-import com.app.todo.model.FacebookPrincipal;
 import com.app.todo.model.FacebookUser;
 import com.app.todo.model.User;
 import com.app.todo.repository.UserRepository;
@@ -12,7 +11,6 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 
