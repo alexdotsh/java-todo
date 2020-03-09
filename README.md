@@ -1,6 +1,8 @@
 ## Todo app in Spring using Docker
 
-### How to: Building the Docker images
+### How to
+
+### Building the Docker images
 
 #### Build environment - Step 1
 Docker image is used for building a *Gradle build* environment. After a successful build, a *build* directory will be created in the same project folder with the build results and a final `.jar` file (To be used in the step 2).

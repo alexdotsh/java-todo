@@ -6,7 +6,7 @@ import javax.persistence.Transient;
 
 @Entity
 @DiscriminatorValue(value = "Local")
-public class LocalUser extends User{
+public class LocalUser extends User {
 
     private String email;
     private String password;

@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class UserController {
 
     @Autowired
-    UserRepository user_repository;
+    UserRepository userRepository;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(Model model) {
 
-        Iterable<User> users = user_repository.findAll();
+        Iterable<User> users = userRepository.findAll();
 
         model.addAttribute("users", users);
 
