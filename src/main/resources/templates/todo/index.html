@@ -14,14 +14,16 @@
         <h4>Welcome: <span sec:authentication="name">Bob</span></h4>
         <div>
             <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>User</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
                 <th:block th:each="todo : ${todos}">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Title</th>
-                            <th>Description</th>
-                            <th>User</th>
-                        </tr>
-                    </thead>
                     <tbody>
                         <tr>
                             <td th:text="${todo.title}"></td>
