@@ -3,6 +3,10 @@
     <head>
         <title>Todo home page</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+        <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+        <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script type="text/javascript" th:src="@{webjars/bootstrap/js/bootstrap.min.js}"></script>
     </head>
     <body>
         <h1>Welcome to the home page!</h1>
@@ -11,7 +15,7 @@
             <th:block th:each="user : ${users}">
 
                 <tr>
-                    <td th:text="${user.Username}">...</td>
+                    <td th:text="${user.username}">...</td>
                     <td>
                         <table>
                             <ul>
