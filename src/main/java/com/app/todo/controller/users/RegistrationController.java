@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.*;
 public class RegistrationController {
     @Autowired
     private UserService userService;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/registration")
     public String registration(Model model) {
@@ -30,7 +28,7 @@ public class RegistrationController {
             return "user/registration";
         }
 
-        userService.saveUser(user);
+        userService.save(user);
         
         return "redirect:/";
     }
