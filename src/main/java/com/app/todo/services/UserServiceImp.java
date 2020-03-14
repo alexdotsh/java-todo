@@ -22,7 +22,7 @@ public class UserServiceImp implements UserService {
     UserRepository userRepository;
 
     @Override
-    public void saveUser(User user) {
+    public void save(User user) {
         user.setPassword(encoder.encode(user.getPassword()));
         Role userRole = roleRepository.findByRole("SITE_USER");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));

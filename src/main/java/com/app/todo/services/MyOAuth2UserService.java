@@ -36,7 +36,7 @@ public class MyOAuth2UserService implements OAuth2UserService<OAuth2UserRequest,
         Map userAttributes = oAuth2Useruser.getAttributes();
         Optional<User> user = userRepository.findByTypeAndExternalId("Facebook", (String)userAttributes.get("id"));
 
-        if(user.isPresent()){
+        if (user.isPresent()) {
             return (FacebookUser)user.get();
 
         } else {

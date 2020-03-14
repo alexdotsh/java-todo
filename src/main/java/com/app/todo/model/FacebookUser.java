@@ -31,9 +31,7 @@ public class FacebookUser extends LocalUser implements OAuth2User {
     }
 
     @Override
-    public Map<String, Object> getAttributes() {
-        return null;
-    }
+    public Map<String, Object> getAttributes() { return null; }
 
     @Override
     public String getName() {
