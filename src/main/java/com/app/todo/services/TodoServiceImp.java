@@ -16,6 +16,11 @@ public class TodoServiceImp implements TodoService {
     @Autowired
     UserRepository userRepository;
 
+//    @Autowired
+//    public TodoServiceImp(UserRepository userRepository) {
+//        this.userRepository = userRepository;
+//    }
+
     @Override
     public void save(Todo todo) {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
