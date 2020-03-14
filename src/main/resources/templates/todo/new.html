@@ -10,7 +10,7 @@
     <body>
         <h1>New todo page</h1>
         <div class="container">
-            <form th:object="${todo}" method="post" action="/todos/create">
+            <form th:object="${todo}" method="POST" action="/todos/create">
                 <input type="hidden" th:field="*{id}" />
 
                 <div>
