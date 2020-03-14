@@ -23,12 +23,10 @@ public class MyOAuth2UserService implements OAuth2UserService<OAuth2UserRequest,
     private UserRepository userRepository;
 
     public MyOAuth2UserService(){
-        System.out.println("MyOAuth2UserService");
         myOAuth2UserService = new DefaultOAuth2UserService();
     }
 
     public MyOAuth2UserService(OAuth2UserService<OAuth2UserRequest, OAuth2User> oAuth2UserService ){
-        System.out.println("MyOAuth2UserService");
         myOAuth2UserService = oAuth2UserService;
     }
 
@@ -37,6 +35,7 @@ public class MyOAuth2UserService implements OAuth2UserService<OAuth2UserRequest,
         OAuth2User oAuth2Useruser = myOAuth2UserService.loadUser(userRequest);
         Map userAttributes = oAuth2Useruser.getAttributes();
         Optional<User> user = userRepository.findByTypeAndExternalId("Facebook", (String)userAttributes.get("id"));
+
         if(user.isPresent()){
             return (FacebookUser)user.get();
 
