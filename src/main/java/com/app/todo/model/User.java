@@ -22,12 +22,10 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank(message = "Name is mandatory")
     private String username;
-
     private String email;
     private String password;
-
+    private String externalId;
     @Transient
     private String passwordConfirm;
 
@@ -37,12 +35,9 @@ public class User {
     @ManyToMany
     private Set<Role> roles;
 
-    private String externalId;
-
     public String getExternalId() {
         return externalId;
     }
-
     public void setExternalId(String externalId) {
         this.externalId = externalId;
     }
@@ -50,7 +45,6 @@ public class User {
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
