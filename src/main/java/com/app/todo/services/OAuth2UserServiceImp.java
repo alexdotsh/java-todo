@@ -15,33 +15,31 @@ import java.util.Map;
 import java.util.Optional;
 
 @Service
-public class MyOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
+public class OAuth2UserServiceImp implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
-    private OAuth2UserService<OAuth2UserRequest, OAuth2User> myOAuth2UserService;
+    private OAuth2UserService<OAuth2UserRequest, OAuth2User> oAuth2UserServiceImp;
 
     @Autowired
     private UserRepository userRepository;
 
-    public MyOAuth2UserService(){
-        System.out.println("MyOAuth2UserService");
-        myOAuth2UserService = new DefaultOAuth2UserService();
-    }
+    public OAuth2UserServiceImp() { oAuth2UserServiceImp = new DefaultOAuth2UserService(); }
 
-    public MyOAuth2UserService(OAuth2UserService<OAuth2UserRequest, OAuth2User> oAuth2UserService ){
-        System.out.println("MyOAuth2UserService");
-        myOAuth2UserService = oAuth2UserService;
+    public OAuth2UserServiceImp(OAuth2UserService<OAuth2UserRequest, OAuth2User> oAuth2UserService ) {
+        oAuth2UserServiceImp = oAuth2UserService;
     }
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-        OAuth2User oAuth2Useruser = myOAuth2UserService.loadUser(userRequest);
-        Map userAttributes = oAuth2Useruser.getAttributes();
-        Optional<User> user = userRepository.findByTypeAndExternalId("Facebook", (String)userAttributes.get("id"));
-        if(user.isPresent()){
-            return (FacebookUser)user.get();
+        OAuth2User oAuth2User = oAuth2UserServiceImp.loadUser(userRequest);
 
+        Map userAttributes = oAuth2User.getAttributes();
+
+        Optional<User> user = userRepository.findByTypeAndExternalId("Facebook", (String)userAttributes.get("id"));
+
+        if (user.isPresent()) {
+            return (FacebookUser)user.get();
         } else {
-            FacebookUser newUser = new FacebookUser(oAuth2Useruser);
+            FacebookUser newUser = new FacebookUser(oAuth2User);
             userRepository.save(newUser);
             return newUser;
         }
