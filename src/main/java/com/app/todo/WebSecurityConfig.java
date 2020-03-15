@@ -1,6 +1,6 @@
 package com.app.todo;
 
-import com.app.todo.services.MyOAuth2UserService;
+import com.app.todo.services.OAuth2UserServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,11 +10,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private MyOAuth2UserService myOAuth2UserService;
+    private OAuth2UserServiceImp oAuth2UserServiceImp;
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() { return new BCryptPasswordEncoder(); }
@@ -30,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
                 .oauth2Login()
             .userInfoEndpoint()
-            .userService(myOAuth2UserService)
+            .userService(oAuth2UserServiceImp)
             .and()
             .and()
             .logout()
