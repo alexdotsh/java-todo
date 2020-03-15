@@ -38,9 +38,9 @@ Docker image is used for building a *Gradle build* environment. After a successf
 
 Set environment variables
 ```bash
-DOCKER_IMAGE_NAME="jdk8-gradle-environment:0.0.1"; export DOCKER_IMAGE_NAME
+DOCKER_IMAGE_NAME="openjdk13-gradle-environment:0.0.1"; export DOCKER_IMAGE_NAME
 PROJECT_DIRECTORY="$PWD"; export PROJECT_DIRECTORY
-APP_NAME="jdk8-app:0.0.1"; export APP_NAME
+APP_NAME="openjdk13-app:0.0.1"; export APP_NAME
 JAR_PATH="build/libs/"; export JAR_PATH
 JAR_FILE="todo-0.0.1-SNAPSHOT.jar"; export JAR_FILE
 JAR=$JAR_PATH$JAR_FILE; export JAR
