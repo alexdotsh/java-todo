@@ -18,12 +18,12 @@ import static org.mockito.Mockito.*;
 public class OAuth2UserServiceImpTest {
 
     @Spy
-    private UserRepository userRepository;// = mock(UserRepository.class);
+    private UserRepository userRepository;
 
     private OAuth2UserServiceImp defaultOAuth2UserServiceMock = mock(OAuth2UserServiceImp.class);
 
     @InjectMocks
-    private OAuth2UserServiceImp myOAuth2UserService = new OAuth2UserServiceImp(defaultOAuth2UserServiceMock);
+    private OAuth2UserServiceImp oAuth2UserServiceImp = new OAuth2UserServiceImp(defaultOAuth2UserServiceMock);
 
     @Before
     public void initMocks() { MockitoAnnotations.initMocks(this); }
@@ -34,7 +34,7 @@ public class OAuth2UserServiceImpTest {
         OAuth2User oAuth2User = mock(OAuth2User.class);
         when(defaultOAuth2UserServiceMock.loadUser(oAuth2UserRequest)).thenReturn(oAuth2User);
 
-        myOAuth2UserService.loadUser(oAuth2UserRequest);
+        oAuth2UserServiceImp.loadUser(oAuth2UserRequest);
 
         verify(this.userRepository, times(1)).save(any());
     }
@@ -47,7 +47,7 @@ public class OAuth2UserServiceImpTest {
         when(userRepository.findByTypeAndExternalId("Facebook", "eqweweq")).thenReturn(Optional.of(mock(FacebookUser.class)));
         when(defaultOAuth2UserServiceMock.loadUser(oAuth2UserRequest)).thenReturn(oAuth2User);
 
-        myOAuth2UserService.loadUser(oAuth2UserRequest);
+        oAuth2UserServiceImp.loadUser(oAuth2UserRequest);
 
         verify(this.userRepository, times(0)).save(any());
     }
