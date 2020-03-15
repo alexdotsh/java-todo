@@ -1,17 +1,46 @@
-## Todo app in Spring using Docker
+# Todo app in Java using Spring
 
-### How to
+## Table of Contents
+* [Requirements](#requirements)
+* [Configuration](#configuration)
+* [Configuration with Docker](#configuration-with-docker)
+* [Run it](#run-it)
 
-### Building the Docker images
+## Requirements
+* [OpenJDK](https://openjdk.java.net/install/) 8 and above
+* [Gradle](https://gradle.org/install/) 6.0.0 and above
+* [MySQL](https://dev.mysql.com/downloads/installer/) 8 and above
+* (Optional)
+  * [Docker](https://docs.docker.com/install/) 18.09 and above
 
-#### Build environment - Step 1
+## Configuration
+
+Work in progress
+
+```bash
+git clone https://github.com/alexmirkhaydarov/java-todo.git
+
+cd java-todo
+
+gradle build
+
+java -jar ./build/libs/todo-0.0.1-SNAPSHOT.jar
+```
+
+Access at: `http://localhost:8080`
+
+## Configuration with Docker
+
+Building the Docker images
+
+### Build environment - Step 1
 Docker image is used for building a *Gradle build* environment. After a successful build, a *build* directory will be created in the same project folder with the build results and a final `.jar` file (To be used in the step 2).
 
 Set environment variables
 ```bash
-DOCKER_IMAGE_NAME="jdk8-gradle-environment:0.0.1"; export DOCKER_IMAGE_NAME
+DOCKER_IMAGE_NAME="openjdk13-gradle-environment:0.0.1"; export DOCKER_IMAGE_NAME
 PROJECT_DIRECTORY="$PWD"; export PROJECT_DIRECTORY
-APP_NAME="jdk8-app:0.0.1"; export APP_NAME
+APP_NAME="openjdk13-app:0.0.1"; export APP_NAME
 JAR_PATH="build/libs/"; export JAR_PATH
 JAR_FILE="todo-0.0.1-SNAPSHOT.jar"; export JAR_FILE
 JAR=$JAR_PATH$JAR_FILE; export JAR
@@ -28,7 +57,11 @@ docker volume create --name gradle-cache
 docker run --rm -v gradle-cache:/home/gradle/.gradle -v "$PROJECT_DIRECTORY":/home/gradle "$DOCKER_IMAGE_NAME" gradle build
 ```
 
-#### Deployable environment - Step 2
+## Run it
+
+Running the Docker images
+
+### Deployable environment - Step 2
 
 a)
 This Docker image is used to copy the `libs/*-0.0.1-SNAPSHOT.jar` file (from step 1) into the image and be able launch/run it from within the container.
@@ -53,11 +86,7 @@ docker run --rm -v gradle-cache:/home/gradle/.gradle -v "$PROJECT_DIRECTORY":/ho
 rm -rf build; docker run --rm -v gradle-cache:/home/gradle/.gradle -v "$PROJECT_DIRECTORY":/home/gradle "$DOCKER_IMAGE_NAME" gradle build && docker-compose restart app
 ```
 
-Access at:
-
-```bash
-localhost:8080
-```
+Access at: `http://localhost:8080`
 
 ## License
 
