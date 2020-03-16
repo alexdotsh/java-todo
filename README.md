@@ -5,7 +5,7 @@
 * [Configuration](#configuration)
 * [Configuration with Docker](#configuration-with-docker)
 * Optional
-  * [Configure OAuth 2.0](#configure-oauth-2.0)
+  * [Configure OAuth 2.0](#configure-oauth-20)
 * [Run it](#run-it)
 
 ## Requirements
