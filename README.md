@@ -2,9 +2,10 @@
 
 ## Table of Contents
 * [Requirements](#requirements)
-* [Configure application.yml](#configure-application.yml)
 * [Configuration](#configuration)
 * [Configuration with Docker](#configuration-with-docker)
+* Optional
+  * [Configure OAuth 2.0](#configure-oauth-2.0)
 * [Run it](#run-it)
 
 ## Requirements
@@ -13,22 +14,6 @@
 * [MySQL](https://dev.mysql.com/downloads/installer/) 8 and above
 * (Optional)
   * [Docker](https://docs.docker.com/install/) 18.09 and above
-
-## Configure `application.yml`
-
-application.yml
-```yaml
-spring:
-  security:
-    oauth2:
-      client:
-        registration:
-          facebook:
-            client-id: facebook-client-id
-            client-secret: facebook-client-secret
-# ...
-```
-Simply use the OAuth 2.0 credentials you created with Facebook, replacing `facebook-client-id` with the client id and `facebook-client-secret` with the client secret.
 
 ## Configuration
 
@@ -73,6 +58,24 @@ Run Gradle build
 docker volume create --name gradle-cache
 docker run --rm -v gradle-cache:/home/gradle/.gradle -v "$PROJECT_DIRECTORY":/home/gradle "$DOCKER_IMAGE_NAME" gradle build
 ```
+
+## Configure OAuth 2.0
+
+(Optional)
+
+application.yml
+```yaml
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          facebook:
+            client-id: facebook-client-id
+            client-secret: facebook-client-secret
+# ...
+```
+Simply use the OAuth 2.0 credentials you created with Facebook, replacing `facebook-client-id` with the client id and `facebook-client-secret` with the client secret.
 
 ## Run it
 
