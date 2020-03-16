@@ -2,6 +2,7 @@
 
 ## Table of Contents
 * [Requirements](#requirements)
+* [Configure application.yml](#configure-application.yml)
 * [Configuration](#configuration)
 * [Configuration with Docker](#configuration-with-docker)
 * [Run it](#run-it)
@@ -12,6 +13,22 @@
 * [MySQL](https://dev.mysql.com/downloads/installer/) 8 and above
 * (Optional)
   * [Docker](https://docs.docker.com/install/) 18.09 and above
+
+## Configure `application.yml`
+
+application.yml
+```yaml
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          facebook:
+            client-id: facebook-client-id
+            client-secret: facebook-client-secret
+# ...
+```
+Simply use the OAuth 2.0 credentials you created with Facebook, replacing `facebook-client-id` with the client id and `facebook-client-secret` with the client secret.
 
 ## Configuration
 
