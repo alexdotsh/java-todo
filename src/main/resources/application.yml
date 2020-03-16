@@ -1,0 +1,24 @@
+logging:
+  level:
+    org.springframework: ERROR
+    com.app.todo: DEBUG
+
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://database:3306/todos_db
+    username: spring
+    password: spring
+  security:
+    oauth2:
+      client:
+        registration:
+          facebook:
+            client-id: your-facebook-client-id
+            client-secret: your-facebook-client-secret
+          google:
+            client-id: your-google-client-id
+            client-secret: your-google-client-id
