@@ -1,13 +1,10 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
+    <head th:replace="fragments/init :: header">
         <title>New todo page</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
-        <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
-        <script type="text/javascript" th:src="@{webjars/bootstrap/js/bootstrap.min.js}"></script>
     </head>
     <body>
+        <div th:replace="fragments/init :: navbar"></div>
         <h1>New todo page</h1>
         <div class="container">
             <form th:object="${todo}" method="POST" action="/todos/create">
@@ -28,5 +25,7 @@
                 </div>
             </form>
         </div>
+        <footer th:replace="fragments/init :: footer">
+        </footer>
     </body>
 </html>

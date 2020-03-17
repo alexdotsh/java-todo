@@ -1,16 +1,11 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
+    <head th:replace="fragments/init :: header">
         <title>Todo home page</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="description" content="Todo page"/>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
-        <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
-        <script type="text/javascript" th:src="@{webjars/bootstrap/js/bootstrap.min.js}"></script>
     </head>
     <body>
+        <div th:replace="fragments/init :: navbar"></div>
+
         <div class="container">
             <h4>Welcome: <span sec:authentication="name">Bob</span></h4>
 
@@ -44,15 +39,9 @@
             <div>
                 <a class="btn btn-dark" th:href="@{/todos/create}">New todo</a>
             </div>
-
-            <div sec:authorize="isAuthenticated()">
-                <a class="btn btn-success"th:href="@{/users/logout}">Sign out</a>
-            </div>
-
-            <div sec:authorize="isAnonymous()">
-                <a class="btn btn-success" th:href="@{/login}">Login</a>
-                <a class="btn btn-primary" th:href="@{/registration}">Register</a>
-            </div>
         </div>
+
+        <footer th:replace="fragments/init :: footer">
+        </footer>
     </body>
 </html>
