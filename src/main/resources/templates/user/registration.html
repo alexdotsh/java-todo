@@ -1,40 +1,35 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>Todo home page - new user registration</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
-        <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
-        <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
-        <script type="text/javascript" th:src="@{webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <head th:replace="fragments/init :: header">
+        <title>New user registration</title>
     </head>
     <body>
-        <h1>Welcome to the registration page!</h1>
-        <br />
-
+        <div th:replace="fragments/init :: navbar"></div>
         <div class="container">
+            <h4>Sign up</h4>
             <form action="/registration" th:object="${user}" method="POST" enctype="utf8">
                 <input type="hidden" th:field="*{id}" />
-                <div>
-                    <input type="text" th:field="*{username}" placeholder="Username" />
+                <div class="form-group">
+                    <label for="UsernameInput">Username</label>
+                    <input type="text" class="form-control" id="UsernameInput" aria-describedby="usernameHelp" placeholder="Enter username" th:field="*{username}">
+                    <small id="usernameHelp" class="form-text text-muted">e.g. Deadpool</small>
                 </div>
-
-                <div>
-                    <input type="text" th:field="*{email}" placeholder="Email" />
+                <div class="form-group">
+                    <label for="EmailInput">Email address</label>
+                    <input type="email" class="form-control" id="EmailInput" aria-describedby="emailHelp" placeholder="Enter email" th:field="*{email}">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                 </div>
-
-                <div>
-                    <input type="password" th:field="*{password}" placeholder="Password" />
+                <div class="form-group">
+                    <label for="PasswordInput">Password</label>
+                    <input type="password" class="form-control" id="PasswordInput" placeholder="Password" th:field="*{password}">
                 </div>
-
-                <div>
-                    <input type="password" th:field="*{passwordConfirm}" placeholder="Password Confirmation" />
+                <div class="form-group">
+                    <label for="PasswordConfirmationInput">Password Confirmation</label>
+                    <input type="password" class="form-control" id="PasswordConfirmationInput" placeholder="Password Confirmation" th:field="*{passwordConfirm}">
                 </div>
-
-                <div>
-                    <button type="submit" th:text="Submit">Create account</button>
-                </div>
+                <button type="submit" class="btn btn-primary">Create account</button>
             </form>
         </div>
+        <footer th:replace="fragments/init :: footer"></footer>
     </body>
 </html>

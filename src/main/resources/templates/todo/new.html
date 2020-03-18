@@ -1,32 +1,35 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>New todo page</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
-        <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
-        <script type="text/javascript" th:src="@{webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <head th:replace="fragments/init :: header">
+        <title>New task</title>
     </head>
     <body>
-        <h1>New todo page</h1>
+        <div th:replace="fragments/init :: navbar"></div>
         <div class="container">
-            <form th:object="${todo}" method="POST" action="/todos/create">
+            <h4>New task</h4>
+            <form action="/todos/create" th:object="${todo}" method="POST" enctype="utf8">
                 <input type="hidden" th:field="*{id}" />
-
-                <div>
-                    <input type="text" th:field="*{title}" placeholder="Title" />
+                <div class="form-group">
+                    <label for="TitleInput">Title</label>
+                    <input type="text" class="form-control" id="TitleInput" aria-describedby="titleHelp" placeholder="Give it a title" th:field="*{title}">
                     <p th:if="${#fields.hasErrors('Title')}" th:errors="*{title}">Incorrect Title</p>
+                    <small id="titleHelp" class="form-text text-muted">e.g. Buy Milk</small>
                 </div>
-
-                <div>
-                    <input type="text" th:field="*{description}" placeholder="Description" />
+                <div class="form-group">
+                    <label for="DescriptionInput">Description</label>
+                    <input type="text" class="form-control" id="DescriptionInput" aria-describedby="descriptionHelp" placeholder="Add some description" th:field="*{description}">
                     <p th:if="${#fields.hasErrors('Description')}" th:errors="*{description}">Incorrect Description</p>
+                    <small id="descriptionHelp" class="form-text text-muted">Go to M&S to buy the Milk.</small>
                 </div>
-
-                <div>
-                    <input type="submit" id="doUpdate" name="_eventId_updateData" value="Create" />
+                <div class="form-group">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="privateCheckbox">
+                        <label class="form-check-label" for="privateCheckbox">Private?</label>
+                    </div>
                 </div>
+                <button type="submit" class="btn btn-primary">Add task</button>
             </form>
         </div>
+        <footer th:replace="fragments/init :: footer"></footer>
     </body>
 </html>
