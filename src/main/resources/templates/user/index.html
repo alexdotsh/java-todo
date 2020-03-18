@@ -1,31 +1,13 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="fragments/header :: head">
+    <head th:replace="fragments/init :: header">
         <title>User page</title>
     </head>
     <body>
-        <h1>Welcome to the home page!</h1>
-        <table>
-            <th>Username</th>
-            <th:block th:each="user : ${users}">
+        <h4>User account</h4>
+        <p th:text="${user.username}"></p>
+        <p th:text="${user.email}"></p>
 
-                <tr>
-                    <td th:text="${user.username}">...</td>
-                    <td>
-                        <table>
-                            <ul>
-                                <div th:each="todo : ${user.Todos}">
-                                    <li th:text="${todo.Title}">"${todo.name}"</li>
-                                </div>
-                            </ul>
-                        </table>
-                    </td>
-                </tr>
-            </th:block>
-        </table>
-        <br />
-        <form action="/new" method="GET">
-            <input type="submit" value="Create new todo task!">
-        </form>
+        <footer th:replace="fragments/init :: footer"></footer>
     </body>
 </html>
