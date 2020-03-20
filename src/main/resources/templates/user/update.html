@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/init :: header">
+        <title>Update account details</title>
+    </head>
+    <body>
+        <div th:replace="fragments/init :: navbar"></div>
+        <div class="container">
+            <h4>Update user details</h4>
+            <form action="/user/update" th:object="${user}" method="POST" enctype="utf8">
+                <input type="hidden" th:field="*{id}" />
+                <div class="form-group">
+                    <label for="UsernameInput">Username</label>
+                    <input type="text" class="form-control" id="UsernameInput" aria-describedby="usernameHelp" placeholder="Enter username" th:field="*{username}">
+                    <small id="usernameHelp" class="form-text text-muted">e.g. Deadpool</small>
+                </div>
+                <div class="form-group">
+                    <label for="EmailInput">Email address</label>
+                    <input type="email" class="form-control" id="EmailInput" aria-describedby="emailHelp" placeholder="Enter email" th:field="*{email}">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                <div class="form-group">
+                    <label for="PasswordInput">Password</label>
+                    <input type="password" class="form-control" id="PasswordInput" placeholder="Password" th:field="*{password}">
+                </div>
+                <div class="form-group">
+                    <label for="PasswordConfirmationInput">Password Confirmation</label>
+                    <input type="password" class="form-control" id="PasswordConfirmationInput" placeholder="Password Confirmation" th:field="*{passwordConfirm}">
+                </div>
+                <button type="submit" class="btn btn-primary">Update account</button>
+            </form>
+        </div>
+        <footer th:replace="fragments/init :: footer"></footer>
+    </body>
+</html>

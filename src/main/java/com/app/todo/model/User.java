@@ -29,8 +29,8 @@ public class User {
     @Transient
     private String passwordConfirm;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Todo> todos;
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    private Set<Todo> todos;
 
     @ManyToMany
     private Set<Role> roles;
@@ -77,8 +77,8 @@ public class User {
         this.passwordConfirm = passwordConfirm;
     }
 
-    public List<Todo> getTodos() { return todos; }
-    public void setTodos(List<Todo> todos) {
+    public Set<Todo> getTodos() { return todos; }
+    public void setTodos(Set<Todo> todos) {
         this.todos = todos;
     }
 
