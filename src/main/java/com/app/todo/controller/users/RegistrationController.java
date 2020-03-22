@@ -11,11 +11,14 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class RegistrationController {
-    @Autowired
     private UserService userService;
+    private SecurityService securityService;
 
     @Autowired
-    private SecurityService securityService;
+    public RegistrationController(UserService userService, SecurityService securityService) {
+        this.userService = userService;
+        this.securityService = securityService;
+    }
 
     @GetMapping("/registration")
     public String registration(Model model) {

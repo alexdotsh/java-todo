@@ -12,14 +12,10 @@ public class DataLoader implements ApplicationRunner {
     private RoleRepository roleRepository;
 
     @Autowired
-    public DataLoader(RoleRepository roleRepository) {
-        this.roleRepository = roleRepository;
-    }
+    public DataLoader(RoleRepository roleRepository) { this.roleRepository = roleRepository; }
 
     @Override
     public void run(ApplicationArguments args) {
-        System.out.println("DEBUG_START");
-
         Role role_user = roleRepository.findByRole("ROLE_USER");
         Role role_admin = roleRepository.findByRole("ROLE_ADMIN");
 
