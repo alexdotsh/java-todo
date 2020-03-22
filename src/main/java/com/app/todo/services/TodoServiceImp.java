@@ -4,6 +4,7 @@ import com.app.todo.model.Todo;
 import com.app.todo.model.User;
 import com.app.todo.repository.TodoRepository;
 import com.app.todo.repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticatedPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,10 +13,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class TodoServiceImp implements TodoService {
-    @Autowired
     TodoRepository todoRepository;
-    @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    public TodoServiceImp(TodoRepository todoRepository, UserRepository userRepository) {
+        this.todoRepository = todoRepository;
+        this.userRepository = userRepository;
+    }
 
     @Override
     public void save(Todo todo) {

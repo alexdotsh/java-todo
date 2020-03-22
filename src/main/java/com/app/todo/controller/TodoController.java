@@ -1,8 +1,9 @@
 package com.app.todo.controller;
 
 import com.app.todo.model.Todo;
-import com.app.todo.repository.TodoRepository;
 import com.app.todo.services.TodoService;
+import com.app.todo.repository.TodoRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,10 +14,14 @@ import javax.validation.Valid;
 
 @Controller
 public class TodoController {
-    @Autowired
     private TodoRepository todoRepository;
-    @Autowired
     private TodoService todoService;
+
+    @Autowired
+    public TodoController(TodoRepository todoRepository, TodoService todoService) {
+        this.todoRepository = todoRepository;
+        this.todoService = todoService;
+    }
 
     @GetMapping({"/", "/todos"})
     public String index(Model model) {
