@@ -11,12 +11,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SecurityServiceImp implements SecurityService {
-    @Autowired
     private AuthenticationManager authenticationManager;
-
-    @Qualifier("userDetailsServiceImp")
-    @Autowired
     private UserDetailsService userDetailsService;
+
+    @Autowired
+    public SecurityServiceImp(AuthenticationManager authenticationManager, @Qualifier("userDetailsServiceImp") UserDetailsService userDetailsService) {
+        this.authenticationManager = authenticationManager;
+        this.userDetailsService = userDetailsService;
+    }
 
     @Override
     public void autoLogin(String username, String password) {

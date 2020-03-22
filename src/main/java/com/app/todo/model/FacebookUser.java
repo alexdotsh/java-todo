@@ -25,7 +25,7 @@ public class FacebookUser extends User implements OAuth2User {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        GrantedAuthority admin = new SimpleGrantedAuthority("SITE_USER");
+        GrantedAuthority admin = new SimpleGrantedAuthority("ROLE_USER");
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
         authorities.add(admin);
         return authorities;
@@ -35,7 +35,5 @@ public class FacebookUser extends User implements OAuth2User {
     public Map<String, Object> getAttributes() { return null; }
 
     @Override
-    public String getName() {
-        return getUsername();
-    }
+    public String getName() { return getUsername(); }
 }
