@@ -3,6 +3,7 @@ package com.app.todo.controller.users;
 import com.app.todo.model.User;
 import com.app.todo.services.UserService;
 import com.app.todo.services.SecurityService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

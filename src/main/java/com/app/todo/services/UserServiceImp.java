@@ -35,11 +35,6 @@ public class UserServiceImp implements UserService {
 
     @Override
     public void update(User user) {
-        // if (user.getTodos() != null) {
-        //     user.getTodos().clear();
-        //     user.getTodos().addAll(user.getTodos());
-        // }
-
         user.setUsername(user.getUsername());
         user.setEmail(user.getEmail());
         user.setPassword(encoder.encode(user.getPassword()));

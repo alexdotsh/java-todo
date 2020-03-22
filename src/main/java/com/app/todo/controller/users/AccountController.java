@@ -1,8 +1,10 @@
-package com.app.todo.controller;
+package com.app.todo.controller.users;
 
 import com.app.todo.model.User;
 import com.app.todo.services.UserService;
+import com.app.todo.services.SecurityService;
 import com.app.todo.repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +16,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 @Controller
 public class AccountController {
-    @Autowired
-    UserRepository userRepository;
-    @Autowired
+    private SecurityService securityService;
     private UserService userService;
+    private UserRepository userRepository;
+
+    @Autowired
+    public AccountController(SecurityService securityService, UserService userService, UserRepository userRepository) {
+        this.securityService = securityService;
+        this.userService = userService;
+        this.userRepository = userRepository;
+    }
 
     @GetMapping("user/account")
     public String index(Model model) {
@@ -55,6 +63,8 @@ public class AccountController {
 
         userService.update(user);
 
-        return "redirect:account";
+        securityService.autoLogin(user.getUsername(), user.getPasswordConfirm());
+
+        return "redirect:/";
     }
 }
