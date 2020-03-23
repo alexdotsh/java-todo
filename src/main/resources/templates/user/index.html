@@ -1,15 +1,18 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
     <head th:replace="fragments/init :: header">
-        <title>User page</title>
+        <title>Account details</title>
     </head>
     <body>
-        <h4>User account</h4>
-        <p th:text="${user.username}"></p>
-        <p th:text="${user.email}"></p>
+        <div th:replace="fragments/init :: navbar"></div>
+        <div class="container">
+            <h4>Account</h4>
+            <hr>
+            Username: <p th:text="${user.username}"></p>
+            Email: <p th:text="${user.email}"></p>
 
-        <a class="btn btn-secondary" th:href="@{/user/{id}(id=${user.id})}">Update account</a>
-
+            <a class="btn btn-secondary" th:href="@{/user/{id}(id=${user.id})}">Update details</a>
+        </div>
         <footer th:replace="fragments/init :: footer"></footer>
     </body>
 </html>
