@@ -8,7 +8,7 @@
         <p th:text="${user.username}"></p>
         <p th:text="${user.email}"></p>
 
-        <a class="btn btn-secondary" th:href="@{/user/{id}/update(id=${user.id})}">Update account</a>
+        <a class="btn btn-secondary" th:href="@{/user/{id}(id=${user.id})}">Update account</a>
 
         <footer th:replace="fragments/init :: footer"></footer>
     </body>

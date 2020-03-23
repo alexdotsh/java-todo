@@ -34,10 +34,11 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public void update(User user) {
-        user.setUsername(user.getUsername());
-        user.setEmail(user.getEmail());
-        user.setPassword(encoder.encode(user.getPassword()));
-        userRepository.save(user);
+    public void update(Long Id, User user) {
+        User update_user = userRepository.findById(user.getId()).orElse(null);;
+        update_user.setUsername(user.getUsername());
+        update_user.setEmail(user.getEmail());
+        update_user.setPassword(encoder.encode(user.getPassword()));
+        userRepository.save(update_user);
     }
 }

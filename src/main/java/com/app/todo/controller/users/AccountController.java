@@ -45,7 +45,7 @@ public class AccountController {
         return "user/index";
     }
 
-    @GetMapping("user/{Id}/update")
+    @GetMapping("user/{Id}")
     public String update(@PathVariable Long Id, Model model) {
         User user = userRepository.findById(Id).get();
 
@@ -54,14 +54,14 @@ public class AccountController {
         return "user/update";
     }
 
-    @PostMapping("user/update")
-    public String update(@ModelAttribute("user") User user, BindingResult bindingResult) {
+    @PostMapping("user/{Id}/update")
+    public String update(@PathVariable Long Id, @ModelAttribute("user") User user, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return "user/update";
         }
 
-        userService.update(user);
+        userService.update(Id, user);
 
         securityService.autoLogin(user.getUsername(), user.getPasswordConfirm());
 
