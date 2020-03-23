@@ -1,6 +1,5 @@
 package com.app.todo.model;
 
-
 import javax.persistence.*;
 import java.util.Set;
 
