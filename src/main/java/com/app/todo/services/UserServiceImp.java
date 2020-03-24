@@ -32,4 +32,13 @@ public class UserServiceImp implements UserService {
         user.setRoles(new HashSet<>(Arrays.asList(userRole)));
         userRepository.save(user);
     }
+
+    @Override
+    public void update(Long Id, User user) {
+        User update_user = userRepository.findById(user.getId()).orElse(null);;
+        update_user.setUsername(user.getUsername());
+        update_user.setEmail(user.getEmail());
+        update_user.setPassword(encoder.encode(user.getPassword()));
+        userRepository.save(update_user);
+    }
 }

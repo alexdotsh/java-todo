@@ -17,8 +17,8 @@ spring:
       client:
         registration:
           facebook:
-            client-id: facebook-client-id
-            client-secret: facebook-client-secret
+            clientId: facebook-client-id
+            clientSecret: facebook-client-secret
           google:
-            client-id: google-client-id
-            client-secret: google-client-id
+            clientId: google-client-id
+            clientSecret: google-client-secret
