@@ -26,7 +26,7 @@
                         <tr>
                             <td th:text="${todo.title}"></td>
                             <td th:text="${todo.description}"></td>
-                            <td th:text="${todo.User.Username}"></td>
+                            <td th:text="${todo.user.username}"></td>
                             <td>
                                 <a class="btn btn-secondary" th:href="@{/todos/{id}/update(id=${todo.id})}">Update</a>
                             </td>
