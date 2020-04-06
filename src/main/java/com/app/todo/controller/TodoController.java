@@ -65,4 +65,11 @@ public class TodoController {
 
         return "redirect:/";
     }
+
+    @GetMapping("todos/{Id}/done")
+    public String done(@PathVariable Long Id) {
+        todoService.done(Id);
+
+        return "redirect:/";
+    }
 }
