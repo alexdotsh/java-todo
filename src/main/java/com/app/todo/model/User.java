@@ -1,8 +1,9 @@
 package com.app.todo.model;
 
+import java.util.Set;
 import javax.persistence.*;
 import java.util.LinkedHashSet;
-import java.util.Set;
+import javax.validation.constraints.NotBlank;
 
 @DiscriminatorColumn(name = "type")
 @Entity
@@ -10,8 +11,13 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "Username is mandatory")
     private String username;
+
+    @NotBlank(message = "Email is mandatory")
     private String email;
+
     private String password;
     @Transient
     private String passwordConfirm;
