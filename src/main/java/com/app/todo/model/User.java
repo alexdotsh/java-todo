@@ -12,10 +12,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Username is mandatory")
+    @NotBlank(message = "Username is mandatory and may not be blank")
     private String username;
 
-    @NotBlank(message = "Email is mandatory")
+    @NotBlank(message = "Email is mandatory and may not be blank")
     private String email;
 
     private String password;
