@@ -8,31 +8,28 @@
         <div class="container">
             <h4>Sign up</h4>
             <form action="/registration" th:object="${user}" method="POST" enctype="utf8">
-                <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
-                    <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
-                </div>
                 <input type="hidden" th:field="*{id}" />
                 <div class="form-group">
                     <label for="UsernameInput">Username</label>
                     <input type="text" class="form-control" id="UsernameInput" aria-describedby="usernameHelp" placeholder="Enter username" th:field="*{username}">
-                    <p th:if="${#fields.hasErrors('username')}" class="label label-danger" th:errors="*{username}"></p>
+                    <p th:if="${#fields.hasErrors('username')}" class="badge badge-danger" th:errors="*{username}"></p>
                     <small id="usernameHelp" class="form-text text-muted">e.g. Deadpool</small>
                 </div>
                 <div class="form-group">
                     <label for="EmailInput">Email address</label>
                     <input type="email" class="form-control" id="EmailInput" aria-describedby="emailHelp" placeholder="Enter email" th:field="*{email}">
-                    <p th:if="${#fields.hasErrors('email')}" class="label label-danger" th:errors="*{email}"></p>
+                    <p th:if="${#fields.hasErrors('email')}" class="badge badge-danger" th:errors="*{email}"></p>
                     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                 </div>
                 <div class="form-group">
                     <label for="PasswordInput">Password</label>
                     <input type="password" class="form-control" id="PasswordInput" placeholder="Password" th:field="*{password}">
-                    <p th:if="${#fields.hasErrors('password')}" class="label label-danger" th:errors="*{password}"></p>
+                    <p th:if="${#fields.hasErrors('password')}" class="badge badge-danger" th:errors="*{password}"></p>
                 </div>
                 <div class="form-group">
                     <label for="PasswordConfirmationInput">Password Confirmation</label>
                     <input type="password" class="form-control" id="PasswordConfirmationInput" placeholder="Password Confirmation" th:field="*{passwordConfirm}">
-                    <p th:if="${#fields.hasErrors('passwordConfirm')}" class="label label-danger" th:errors="*{passwordConfirm}"></p>
+                    <p th:if="${#fields.hasErrors('passwordConfirm')}" class="badge badge-danger" th:errors="*{passwordConfirm}"></p>
                 </div>
                 <button type="submit" class="btn btn-primary">Create account</button>
             </form>
