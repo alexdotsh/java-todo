@@ -4,6 +4,7 @@ import java.util.Set;
 import javax.persistence.*;
 import java.util.LinkedHashSet;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @DiscriminatorColumn(name = "type")
 @Entity
@@ -12,12 +13,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Size(min = 2, max = 20, message = "Min 6 and max 20 characters")
     @NotBlank(message = "Username is mandatory and may not be blank")
     private String username;
 
     @NotBlank(message = "Email is mandatory and may not be blank")
     private String email;
 
+    @Size(min = 8, max = 20, message = "Min 8 and max 20 characters")
     private String password;
     @Transient
     private String passwordConfirm;
