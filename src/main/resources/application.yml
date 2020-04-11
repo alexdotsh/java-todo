@@ -22,3 +22,5 @@ spring:
           google:
             clientId: google-client-id
             clientSecret: google-client-secret
+  messages:
+    basename: validation

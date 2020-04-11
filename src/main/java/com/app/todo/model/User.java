@@ -1,8 +1,11 @@
 package com.app.todo.model;
 
+import java.util.Set;
 import javax.persistence.*;
 import java.util.LinkedHashSet;
-import java.util.Set;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @DiscriminatorColumn(name = "type")
 @Entity
@@ -10,8 +13,16 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Size(min = 2, max = 20, message = "Username needs to be between 2 to 20 characters long")
+    @NotBlank(message = "Username can't be blank")
     private String username;
+
+    @NotBlank(message = "Email can't be blank")
+    @Email
     private String email;
+
+    @Size(min = 8, max = 20, message = "Password needs to be between 2 to 20 characters long")
     private String password;
     @Transient
     private String passwordConfirm;

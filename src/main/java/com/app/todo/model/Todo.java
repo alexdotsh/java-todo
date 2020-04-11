@@ -10,10 +10,10 @@ public class Todo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Name is mandatory")
+    @NotBlank(message = "Title can't be blank")
     private String Title;
 
-    @Size(min = 5, message = "Description need to be longer")
+    @Size(min = 5, max = 30, message = "Description needs to be between 5 to 30 characters long")
     private String Description;
 
     @Column(columnDefinition = "boolean default false")
