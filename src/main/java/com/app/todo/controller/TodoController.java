@@ -25,7 +25,7 @@ public class TodoController {
 
     @GetMapping({"/", "/todos"})
     public String index(Model model) {
-        Iterable<Todo> todos = todoRepository.findAll();
+        Iterable<Todo> todos = todoRepository.findAllByDone(false);
 
         model.addAttribute("todos", todos);
 
