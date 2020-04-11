@@ -32,6 +32,15 @@ public class TodoController {
         return "todo/index";
     }
 
+    @GetMapping("/completed_tasks")
+    public String completedTasks(Model model) {
+        Iterable<Todo> tasks = todoRepository.findAllByDone(true);
+
+        model.addAttribute("completedTasks", tasks);
+
+        return "todo/completed_tasks";
+    }
+
     @GetMapping("todos/create")
     public String create(Model model) {
         model.addAttribute("todo", new Todo());
