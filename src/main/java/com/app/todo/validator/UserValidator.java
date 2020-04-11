@@ -29,6 +29,10 @@ public class UserValidator implements Validator {
             errors.rejectValue("username", "Duplicate.user.username");
         }
 
+        if (userService.findByEmail(user.getEmail()) != null) {
+            errors.rejectValue("email", "Duplicate.user.email");
+        }
+
         if (!user.getPasswordConfirm().equals(user.getPassword())) {
             errors.rejectValue("passwordConfirm", "Diff.user.passwordConfirm");
         }

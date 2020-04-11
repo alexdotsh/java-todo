@@ -7,4 +7,5 @@ public interface UserService {
     void update(Long Id, User user);
 
     User findByUsername(String username);
+    User findByEmail(String email);
 }
