@@ -17,6 +17,7 @@
                         <th>Title</th>
                         <th>Description</th>
                         <th>User</th>
+                        <th>Mark Done</th>
                         <th>Update</th>
                         <th>Delete</th>
                     </tr>
@@ -27,6 +28,9 @@
                             <td th:text="${todo.title}"></td>
                             <td th:text="${todo.description}"></td>
                             <td th:text="${todo.user.username}"></td>
+                            <td>
+                                <a class="btn btn-secondary" th:href="@{/todos/{id}/done(id=${todo.id})}">Done</a>
+                            </td>
                             <td>
                                 <a class="btn btn-secondary" th:href="@{/todos/{id}/update(id=${todo.id})}">Update</a>
                             </td>
