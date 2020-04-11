@@ -22,13 +22,16 @@ public class User {
     @Email
     private String email;
 
-    @Size(min = 8, max = 20, message = "Password needs to be between 2 to 20 characters long")
+    @Size(min = 8, max = 60, message = "Password needs to be between 8 to 60 characters long")
+    @NotBlank(message = "Password can't be blank")
     private String password;
+
     @Transient
     private String passwordConfirm;
 
     @Column(insertable = false, updatable = false, unique = true)
     private String type;
+
     @Column(unique = true)
     private String externalId;
 
