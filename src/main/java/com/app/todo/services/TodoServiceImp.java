@@ -10,6 +10,7 @@ import org.springframework.security.core.AuthenticatedPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import javax.persistence.EntityNotFoundException;
 
 @Service
 public class TodoServiceImp implements TodoService {
@@ -42,4 +43,11 @@ public class TodoServiceImp implements TodoService {
 
     @Override
     public void delete(Long Id) { todoRepository.deleteById(Id); }
+
+    @Override
+    public void done(Long Id) {
+        Todo todo = todoRepository.findById(Id).orElseThrow(() -> new EntityNotFoundException("Todo not found"));
+        todo.setDone(true);
+        todoRepository.save(todo);
+    }
 }
