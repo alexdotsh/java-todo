@@ -25,11 +25,20 @@ public class TodoController {
 
     @GetMapping({"/", "/todos"})
     public String index(Model model) {
-        Iterable<Todo> todos = todoRepository.findAll();
+        Iterable<Todo> todos = todoRepository.findAllByDone(false);
 
         model.addAttribute("todos", todos);
 
         return "todo/index";
+    }
+
+    @GetMapping("tasks/completed")
+    public String completedTasks(Model model) {
+        Iterable<Todo> tasks = todoRepository.findAllByDone(true);
+
+        model.addAttribute("completedTasks", tasks);
+
+        return "todo/completed_tasks";
     }
 
     @GetMapping("todos/create")
