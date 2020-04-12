@@ -24,3 +24,6 @@ spring:
             clientSecret: google-client-secret
   messages:
     basename: validation
+  data:
+    rest:
+      basePath: /api
