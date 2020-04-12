@@ -19,6 +19,19 @@
 
 Work in progress
 
+MySQL configuration (based on `application.yml`)
+```bash
+mysql -u user-with-privilege -p
+```
+
+```sql
+CREATE DATABASE todos_db;
+CREATE USER 'spring'@'localhost' IDENTIFIED BY 'spring';
+GRANT ALL PRIVILEGES ON todos_db.* TO 'spring'@'localhost';
+FLUSH PRIVILEGES;
+QUIT
+```
+
 ```bash
 git clone https://github.com/alexmirkhaydarov/java-todo.git
 
