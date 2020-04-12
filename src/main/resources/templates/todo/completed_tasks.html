@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/init :: header">
+        <meta charset="UTF-8">
+        <title>Completed tasks</title>
+    </head>
+    <body>
+        <div th:replace="fragments/init :: navbar"></div>
+
+        <div class="container">
+            <div sec:authorize="isAuthenticated()">
+                <h4>Welcome: <span sec:authentication="name"></span></h4>
+            </div>
+
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>User</th>
+                    <th>Completed At</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <th:block th:each="task : ${completedTasks}">
+                    <tr>
+                        <td th:text="${task.title}"></td>
+                        <td th:text="${task.description}"></td>
+                        <td th:text="${task.user.username}"></td>
+                        <td>Date: TODO</td>
+                        <td>
+                            <a class="btn btn-danger" th:href="@{/todos/{id}/delete(id=${task.id})}">Delete</a>
+                        </td>
+                    </tr>
+                </th:block>
+                </tbody>
+            </table>
+
+            <div>
+                <a class="btn btn-dark" th:href="@{/todos}">Home</a>
+            </div>
+        </div>
+
+        <footer th:replace="fragments/init :: footer"></footer>
+    </body>
+</html>

@@ -32,7 +32,7 @@ public class TodoController {
         return "todo/index";
     }
 
-    @GetMapping("/completed_tasks")
+    @GetMapping("tasks/completed")
     public String completedTasks(Model model) {
         Iterable<Todo> tasks = todoRepository.findAllByDone(true);
 

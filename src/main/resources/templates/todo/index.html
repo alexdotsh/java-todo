@@ -29,7 +29,7 @@
                             <td th:text="${todo.description}"></td>
                             <td th:text="${todo.user.username}"></td>
                             <td>
-                                <a class="btn btn-secondary" th:href="@{/todos/{id}/done(id=${todo.id})}">Done</a>
+                                <a class="btn btn-info" th:href="@{/todos/{id}/done(id=${todo.id})}">Done</a>
                             </td>
                             <td>
                                 <a class="btn btn-secondary" th:href="@{/todos/{id}/update(id=${todo.id})}">Update</a>
@@ -44,6 +44,7 @@
 
             <div>
                 <a class="btn btn-dark" th:href="@{/todos/create}">New todo</a>
+                <a class="btn btn-info" th:href="@{/tasks/completed}">Completed Tasks</a>
             </div>
         </div>
 
