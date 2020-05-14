@@ -6,7 +6,7 @@ plugins {
 
 group = 'com.app'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = '13'
 
 configurations {
 	developmentOnly
@@ -23,6 +23,7 @@ ext['spring-security.version']='5.2.2.RELEASE'
 
 dependencies {
 	implementation('org.springframework.boot:spring-boot-starter-web')
+	implementation("org.springframework.boot:spring-boot-starter-data-rest")
 	compile("org.springframework.boot:spring-boot-starter-thymeleaf")
 	compile("org.thymeleaf.extras:thymeleaf-extras-springsecurity5")
 
