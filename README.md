@@ -19,7 +19,7 @@
 
 Work in progress
 
-MySQL configuration (based on `application.yml`)
+MySQL configuration (based on `src/main/resources/application.yml`)
 ```bash
 mysql -u user-with-privilege -p
 ```
@@ -30,6 +30,16 @@ CREATE USER 'spring'@'localhost' IDENTIFIED BY 'spring';
 GRANT ALL PRIVILEGES ON todos_db.* TO 'spring'@'localhost';
 FLUSH PRIVILEGES;
 QUIT
+```
+
+Using MySQL docker container
+```bash
+docker run --name database \
+    -e MYSQL_ROOT_PASSWORD=rootpassword \
+    -e MYSQL_PASSWORD=spring \
+    -e MYSQL_USER=spring \
+    -e MYSQL_DATABASE=todos_db
+    -d mysql:8.0.21
 ```
 
 ```bash
