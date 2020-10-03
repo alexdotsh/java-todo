@@ -17,7 +17,7 @@ services:
       - database
     entrypoint: /bin/bash -c "./wait-for-it.sh -t 0 database:3306 -- java -Djava.security.egd=file:/dev/./urandom -jar /tmp/todo-0.0.1-SNAPSHOT.jar"
   database:
-    image: mysql:8.0.14
+    image: mysql:8.0.21
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=rootpassword
