@@ -1,7 +1,9 @@
-version: '3.7'
+version: '3.9'
 
 services:
-  app:
+  todo_app:
+    container_name: todo_app
+    hostname: todo_app
     build:
       context: .
       dockerfile: ./docker/Dockerfile
@@ -11,14 +13,24 @@ services:
       - type: bind
         source: ./build/libs
         target: /tmp
+      - ./elastic-apm-agent-1.19.0.jar:/jars/elastic-apm-agent-1.19.0.jar
     ports:
       - 8080:8080
+    networks:
+      - todo
     depends_on:
       - database
+    # entrypoint: /bin/bash -c "./wait-for-it.sh -t 0 database:3306 -- java -javaagent:/jars/elastic-apm-agent-1.19.0.jar -Delastic.apm.service_name=todo_app -Delastic.apm.server_urls=http://apm:8200 -Delastic.apm.application_packages=com.app -Djava.security.egd=file:/dev/./urandom -jar /tmp/todo-0.0.1-SNAPSHOT.jar"
     entrypoint: /bin/bash -c "./wait-for-it.sh -t 0 database:3306 -- java -Djava.security.egd=file:/dev/./urandom -jar /tmp/todo-0.0.1-SNAPSHOT.jar"
   database:
     image: mysql:8.0.14
+    container_name: todo_database
+    hostname: database
     restart: always
+    ports:
+      - 3306:3306
+    networks:
+      - todo
     environment:
       - MYSQL_ROOT_PASSWORD=rootpassword
       - MYSQL_PASSWORD=spring
@@ -28,3 +40,7 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     security_opt:
       - seccomp:unconfined
+
+networks:
+  todo:
+    driver: bridge

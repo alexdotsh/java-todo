@@ -1,7 +1,7 @@
-FROM openjdk:13-jdk-alpine
+FROM adoptopenjdk/openjdk11:jdk-11.0.9_11.1-alpine
 
 ENV HOME="/home"
-ENV GRADLE_VERSION=6.2.1
+ENV GRADLE_VERSION=6.7.1
 ENV GRADLE_USER_HOME="$HOME/gradle/.gradle"
 
 RUN apk add --no-cache \
